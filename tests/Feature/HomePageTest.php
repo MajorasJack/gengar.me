@@ -27,3 +27,7 @@ it('preloads the self-hosted fonts', function (): void {
         ->assertSee('<link rel="preload" href="/fonts/geist-latin.woff2"', escape: false)
         ->assertSee('<link rel="preload" href="/fonts/geist-mono-latin.woff2"', escape: false);
 });
+
+it('ships no JavaScript on the homepage', function (): void {
+    $this->get('/')->assertOk()->assertDontSee('<script', escape: false);
+});
