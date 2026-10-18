@@ -23,8 +23,14 @@ return [
         'cv' => '/cv.pdf',
     ],
 
-    // Filled in S1-02.
-    'what_i_do' => [],
+    // TODO(owner): S1-02 replaces these drafts from mockup C with Jack's copy: one sentence each,
+    // no employer names, no performance figures (CONT-2).
+    'what_i_do' => [
+        ['title' => 'Performance', 'description' => 'Slow queries traced to the cause and fixed at the data layer.'],
+        ['title' => 'APIs and integrations', 'description' => 'Queues, webhooks, third-party platforms, eID sign-in.'],
+        ['title' => 'Standards', 'description' => 'Testing guides, review norms, CI, RFCs.'],
+        ['title' => 'Claude Code', 'description' => 'AI-led front ends. I own the backend, tests and review.'],
+    ],
 
     // Keys per entry: slug, name, summary, stack (list), tests (int, approximate),
     // tests_checked_at (Y-m-d), url (nullable), visibility (label when url is null),

@@ -32,6 +32,21 @@ it('links the email address with mailto', function (): void {
     $this->get('/')->assertOk()->assertSee('<a href="mailto:jack@gengar.me">jack@gengar.me</a>', escape: false);
 });
 
+it('renders each what I do area from config', function (): void {
+    config(['portfolio.what_i_do' => [
+        ['title' => fake()->words(2, true), 'description' => fake()->sentence()],
+        ['title' => fake()->words(2, true), 'description' => fake()->sentence()],
+    ]]);
+
+    $this->get('/')->assertOk()->assertSeeInOrder([
+        'what I do',
+        config('portfolio.what_i_do.0.title'),
+        config('portfolio.what_i_do.0.description'),
+        config('portfolio.what_i_do.1.title'),
+        config('portfolio.what_i_do.1.description'),
+    ]);
+});
+
 it('labels the CV button', function (): void {
     $this->get('/')->assertOk()->assertSee('<a class="primary" href="/cv.pdf">Download CV</a>', escape: false);
 });
