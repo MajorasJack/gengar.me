@@ -34,8 +34,65 @@ return [
 
     // Keys per entry: slug, name, summary, stack (list), tests (int, approximate),
     // tests_checked_at (Y-m-d), url (nullable), visibility (label when url is null),
-    // status (live or private), detail (problem, built, notes; S3). Filled in S1-03.
-    'projects' => [],
+    // status (live or private), detail (problem, built, notes; S3). Test counts are the
+    // PHP suite as listed by `pest --list-tests`.
+    'projects' => [
+        [
+            'slug' => 'promotr',
+            'name' => 'Promotr',
+            'summary' => 'Event management for live-music promoters: budgets, tours, artists, contracts and ticketing.',
+            'stack' => ['Laravel 12', 'Inertia 2', 'Vue 3', 'Reverb', 'Meilisearch', 'Cashier'],
+            'tests' => 30945,
+            'tests_checked_at' => '2026-10-18',
+            'url' => 'https://promotr.co',
+            'visibility' => null,
+            'status' => 'live',
+        ],
+        [
+            'slug' => 'larder',
+            'name' => 'Larder',
+            'summary' => 'Household recipes and pantry app that imports recipes with Claude, matches them to stock and builds the shopping list.',
+            'stack' => ['Laravel 13', 'PostgreSQL', 'Vue 3', 'Passkeys', 'Anthropic API'],
+            'tests' => 1741,
+            'tests_checked_at' => '2026-10-18',
+            'url' => null,
+            'visibility' => 'private beta',
+            'status' => 'private',
+        ],
+        [
+            'slug' => 'darkroom',
+            'name' => 'Darkroom',
+            'summary' => 'Image tools: background removal, upscaling, conversion, compression and image to PDF.',
+            'stack' => ['Laravel 13', 'Inertia 3', 'Vue 3', 'Python FastAPI', 'pyvips', 'ONNX'],
+            'tests' => 165,
+            'tests_checked_at' => '2026-10-18',
+            'url' => 'https://darkroom.gengar.me',
+            'visibility' => null,
+            'status' => 'live',
+        ],
+        [
+            'slug' => 'drinksafe',
+            'name' => 'DrinkSafe',
+            'summary' => 'Community drink-spiking reports, venue safety scores and an incident heatmap.',
+            'stack' => ['Laravel 13', 'Inertia 3', 'Vue 3', 'Leaflet', 'Turnstile'],
+            'tests' => 512,
+            'tests_checked_at' => '2026-10-18',
+            'url' => 'https://drinksafe.app',
+            'visibility' => null,
+            'status' => 'live',
+        ],
+        [
+            'slug' => 'movies',
+            'name' => 'Movies',
+            'summary' => 'Catalogue for a physical film collection, filled in from a barcode scan.',
+            'stack' => ['Laravel 13', 'Inertia 3', 'React 19', 'TMDB', 'OMDb'],
+            'tests' => 2423,
+            'tests_checked_at' => '2026-10-18',
+            'url' => 'https://movies.gengar.me',
+            'visibility' => null,
+            'status' => 'live',
+        ],
+    ],
 
     'smaller_tools' => [],
 
