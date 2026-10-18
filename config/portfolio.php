@@ -101,6 +101,28 @@ return [
         ['name' => 'Shopify image optimiser', 'description' => 'Compresses product images and drafts alt text with Claude for a person to approve.'],
     ],
 
-    // Names that must never appear on a public page (CONT-6). Filled in S1-05.
-    'denylist' => [],
+    // Names that must never appear on a public page (CONT-6), matched as whole words, ignoring case.
+    // TODO(owner): Jack to confirm this list: every employer in the CV profile, then the shops and their domains.
+    'denylist' => [
+        'Nordhealth',
+        'EasyPractice',
+        'Clicks & Mortar',
+        'Jacobs Enforcement',
+        'PerchPeek',
+        'Lavatech',
+        'inCase',
+        'Boohoo',
+        'e3creative',
+        'Dept',
+        'First Internet',
+        'Cirrus Connect',
+        'Capgemini',
+        'Unusual Horror',
+        'unusualhorror',
+        'Rancid Offal Records',
+        'rancidoffalrecords',
+        'RXOX Records',
+        'rxoxrecords',
+        'Offal Fest',
+    ],
 ];

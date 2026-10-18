@@ -12,3 +12,7 @@ test('what I do has four areas, each with a title and a description', function (
     expect($portfolio['what_i_do'])->toHaveCount(4)
         ->each->toHaveKeys(['title', 'description']);
 });
+
+test('the denylist is not empty', function () use ($portfolio): void {
+    expect($portfolio['denylist'])->not->toBeEmpty();
+});

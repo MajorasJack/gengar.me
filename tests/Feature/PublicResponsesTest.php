@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 
-dataset('public responses', [
-    'homepage' => '/',
-    'health check' => '/up',
-    'not found page' => fn (): string => sprintf('/%s', fake()->slug()),
-]);
-
 test('only the public pages are registered', function (): void {
     expect(collect(Route::getRoutes()->getRoutes())->map->uri()->sort()->values()->all())->toBe(['/', 'up']);
 });
