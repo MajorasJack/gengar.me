@@ -1,5 +1,5 @@
 <header>
-    <div class="prompt"><b>{{ $profile['email'] }}</b> ~ {{ $profile['location'] }} · {{ $profile['remote'] }}{{ $available ? ' · available for work' : '' }}</div>
+    <div class="prompt"><b>{{ $profile['email'] }}</b> ~ {{ $profile['location'] }} · <span>{{ $profile['remote'] }}</span>@if ($available) · <span>available for work</span>@endif</div>
     <h1>{{ $profile['name'] }}, {{ $profile['role'] }}</h1>
     <p class="intro">{{ $profile['intro'] }}</p>
     <nav class="links" aria-label="Contact">

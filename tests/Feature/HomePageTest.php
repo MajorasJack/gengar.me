@@ -101,7 +101,7 @@ it('shows a private project its visibility label without a link', function (): v
 
     $table = Str::between($this->get('/')->assertOk()->getContent(), '<table', '</table>');
 
-    expect($table)->toContain('<td class="host private" data-label="host">private beta</td>')->not->toContain('<a ');
+    expect($table)->toContain('<td class="host private" role="cell" data-label="host">private beta</td>')->not->toContain('<a ');
 });
 
 it('marks a private project with the off status dot', function (): void {
@@ -115,6 +115,15 @@ it('marks a private project with the off status dot', function (): void {
 it('labels each project cell for the stacked mobile layout', function (string $label): void {
     $this->get('/')->assertOk()->assertSee(sprintf('data-label="%s"', $label), escape: false);
 })->with(['host', 'what it does', 'stack', 'tests']);
+
+it('keeps explicit table roles on the projects table for the stacked mobile layout', function (): void {
+    $roles = ['table' => 'table', 'thead' => 'rowgroup', 'tbody' => 'rowgroup', 'tr' => 'row', 'th' => 'columnheader', 'td' => 'cell'];
+
+    preg_match_all('/<(table|thead|tbody|tr|th|td)\b([^>]*)>/', Str::between($this->get('/')->assertOk()->getContent(), '<section aria-labelledby="running-projects">', '</section>'), $tags, PREG_SET_ORDER);
+
+    expect($tags)->not->toBeEmpty()
+        ->and(array_filter($tags, fn (array $tag): bool => ! str_contains($tag[2], sprintf('role="%s"', $roles[$tag[1]]))))->toBeEmpty();
+});
 
 it('lists the smaller tools without links', function (): void {
     config(['portfolio.smaller_tools' => [

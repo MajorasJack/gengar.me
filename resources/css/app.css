@@ -120,6 +120,11 @@ main {
     color: var(--colour-muted);
 }
 
+/* Segments break between each other, never inside one ("remote-first" split at the hyphen at 360px). */
+.prompt span {
+    white-space: nowrap;
+}
+
 .prompt b {
     color: var(--colour-accent);
     font-weight: 500;
