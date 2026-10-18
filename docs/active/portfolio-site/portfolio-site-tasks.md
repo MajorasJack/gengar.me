@@ -59,8 +59,8 @@ The app has no database (ADR-001). These rules still apply:
 - [x] **S1-08** (#15) Check contrast for every text/background token pair, focus states, and the homepage transfer size · Req: NFR-1, NFR-3 · Files: `resources/css/app.css` · `routine` · Done when every pair meets AA, each link shows a visible focus ring, and the transfer size is under 150 KB (numbers recorded in context).
 
 **S1 review checkpoint**
-- [ ] `code-auditor` review; Critical and High findings fixed
-- [ ] Demo: open `/` at 1280px and 360px and read every section; download the CV
+- [x] `code-auditor` review; Critical and High findings fixed (#16: flaky denylist test fixed by a six-word limit; history exposure already accepted, context row corrected; Low findings fixed)
+- [x] Demo: open `/` at 1280px and 360px and read every section; download the CV (checked 2026-10-18 on `6660ed2` in headless Chromium: no horizontal overflow at 360px, `/cv.pdf` served as `application/pdf`, no cookies on `/`)
 - [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
 
 ---
