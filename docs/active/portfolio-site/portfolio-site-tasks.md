@@ -37,7 +37,7 @@ The app has no database (ADR-001). These rules still apply:
 
 **S0 review checkpoint**
 - [x] `feature-dev:code-reviewer` review; Critical and High findings fixed (#5: `/up` third-party assets fixed; route list pinned; checks run on every public response)
-- [ ] Demo: CI green; `/` renders the layout with no cookies set
+- [x] Demo: CI green; `/` renders the layout with no cookies set (checked 2026-10-18, 27 tests on `028b7e6`)
 - [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
 
 ---
