@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Str;
+
 it('renders the homepage', function (): void {
     $this->get('/')->assertOk()->assertViewIs('home');
 });
@@ -49,4 +51,68 @@ it('renders each what I do area from config', function (): void {
 
 it('labels the CV button', function (): void {
     $this->get('/')->assertOk()->assertSee('<a class="primary" href="/cv.pdf">Download CV</a>', escape: false);
+});
+
+it('lists the featured projects in config order', function (): void {
+    config(['portfolio.projects' => [
+        ['slug' => fake()->unique()->slug(), 'name' => 'Zebra', 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => fake()->url(), 'visibility' => null, 'status' => 'live'],
+        ['slug' => fake()->unique()->slug(), 'name' => 'Aardvark', 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => fake()->url(), 'visibility' => null, 'status' => 'live'],
+    ]]);
+
+    $this->get('/')->assertOk()->assertSeeInOrder(['running projects', 'Zebra', 'Aardvark']);
+});
+
+it('shows each project summary, stack and approximate test count', function (): void {
+    config(['portfolio.projects' => [
+        ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13', 'Vue 3', 'Reverb'], 'tests' => 30945, 'tests_checked_at' => '2026-10-18', 'url' => fake()->url(), 'visibility' => null, 'status' => 'live'],
+    ]]);
+
+    $this->get('/')->assertOk()->assertSeeInOrder([
+        config('portfolio.projects.0.summary'),
+        'Laravel 13 · Vue 3 · Reverb',
+        '~30,945',
+    ]);
+});
+
+it('links a public project by its host', function (): void {
+    config(['portfolio.projects' => [
+        ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => 'https://darkroom.gengar.me', 'visibility' => null, 'status' => 'live'],
+    ]]);
+
+    $this->get('/')->assertOk()->assertSee('<a href="https://darkroom.gengar.me">darkroom.gengar.me</a>', escape: false);
+});
+
+it('shows a private project its visibility label without a link', function (): void {
+    config(['portfolio.projects' => [
+        ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => null, 'visibility' => 'private beta', 'status' => 'private'],
+    ]]);
+
+    $table = Str::between($this->get('/')->assertOk()->getContent(), '<table', '</table>');
+
+    expect($table)->toContain('<td class="host private" data-label="host">private beta</td>')->not->toContain('<a ');
+});
+
+it('marks a private project with the off status dot', function (): void {
+    config(['portfolio.projects' => [
+        ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => null, 'visibility' => 'private beta', 'status' => 'private'],
+    ]]);
+
+    $this->get('/')->assertOk()->assertSee('<span class="dot off" aria-hidden="true"></span>', escape: false);
+});
+
+it('labels each project cell for the stacked mobile layout', function (string $label): void {
+    $this->get('/')->assertOk()->assertSee(sprintf('data-label="%s"', $label), escape: false);
+})->with(['host', 'what it does', 'stack', 'tests']);
+
+it('lists the smaller tools without links', function (): void {
+    config(['portfolio.smaller_tools' => [
+        ['name' => fake()->words(2, true), 'description' => fake()->sentence()],
+        ['name' => fake()->words(2, true), 'description' => fake()->sentence()],
+    ]]);
+
+    $tools = Str::between($this->get('/')->assertOk()->getContent(), 'id="smaller-tools"', '</section>');
+
+    expect($tools)
+        ->toContain(e(config('portfolio.smaller_tools.0.name')), e(config('portfolio.smaller_tools.0.description')), e(config('portfolio.smaller_tools.1.name')))
+        ->not->toContain('<a ');
 });

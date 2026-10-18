@@ -232,6 +232,14 @@ td.host {
     white-space: nowrap;
 }
 
+td.host a {
+    text-decoration: none;
+}
+
+td.host a:hover {
+    text-decoration: underline;
+}
+
 td.host.private {
     color: var(--colour-muted);
 }
@@ -266,6 +274,73 @@ td.tests {
 
 .dot.off {
     background: var(--colour-muted);
+}
+
+/* Below 640px each row becomes a block, and every cell but the name is labelled from its data-label (UI-3). */
+@media (max-width: 639.98px) {
+    .projects thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    .projects,
+    .projects tbody,
+    .projects tr,
+    .projects td {
+        display: block;
+    }
+
+    .projects tr {
+        padding-block: 14px;
+        border-bottom: 1px solid var(--colour-line);
+    }
+
+    .projects td {
+        display: grid;
+        grid-template-columns: 7rem minmax(0, 1fr);
+        gap: var(--space-3);
+        padding: 2px 0;
+        border-bottom: 0;
+        text-align: left;
+        white-space: normal;
+    }
+
+    .projects td.name {
+        display: block;
+        padding-bottom: var(--space-2);
+    }
+
+    .projects td[data-label]::before {
+        content: attr(data-label);
+        color: var(--colour-muted);
+        font-family: var(--font-mono);
+        font-size: var(--text-2xs);
+        font-weight: 400;
+    }
+
+    .projects td.tests {
+        text-align: left;
+    }
+}
+
+/* Smaller tools */
+.tools {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--colour-muted);
+    font-size: var(--text-md);
+}
+
+.tools b {
+    color: var(--colour-ink);
+    font-weight: 600;
 }
 
 /* Footer */
