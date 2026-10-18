@@ -12,7 +12,6 @@ final readonly class Project
 
     /**
      * @param  list<string>  $stack
-     * @param  'live'|'private'  $status
      */
     public function __construct(
         public string $slug,
@@ -23,7 +22,7 @@ final readonly class Project
         public string $testsCheckedAt,
         public ?string $url,
         public ?string $visibility,
-        public string $status,
+        public ProjectStatus $status,
     ) {}
 
     /**
@@ -32,7 +31,7 @@ final readonly class Project
      *
      * @param  array<string, mixed>  $entry
      *
-     * @throws InvalidProjectException when a required key is missing, or there is neither a url nor a visibility label
+     * @throws InvalidProjectException when a required key is missing, the status is unknown, or there is neither a url nor a visibility label
      */
     public static function fromArray(array $entry): self
     {
@@ -55,7 +54,8 @@ final readonly class Project
             testsCheckedAt: $entry['tests_checked_at'],
             url: $entry['url'] ?? null,
             visibility: $entry['visibility'] ?? null,
-            status: $entry['status'],
+            status: ProjectStatus::tryFrom($entry['status'])
+                ?? throw InvalidProjectException::unknownStatus(slug: $entry['slug'], status: $entry['status']),
         );
     }
 }

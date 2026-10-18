@@ -23,4 +23,12 @@ class InvalidProjectException extends InvalidArgumentException
     {
         return new self(sprintf('Portfolio project "%s" needs a url or a visibility label.', $slug));
     }
+
+    /**
+     * A project's status is not one the page knows how to show.
+     */
+    public static function unknownStatus(string $slug, string $status): self
+    {
+        return new self(sprintf('Portfolio project "%s" has an unknown status "%s".', $slug, $status));
+    }
 }

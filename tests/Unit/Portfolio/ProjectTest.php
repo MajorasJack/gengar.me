@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Portfolio\Exceptions\InvalidProjectException;
 use App\Portfolio\Project;
+use App\Portfolio\ProjectStatus;
 
 $validEntry = fn (): array => [
     'slug' => fake()->slug(2),
@@ -31,7 +32,7 @@ it('builds a project from a valid entry', function () use ($validEntry): void {
         testsCheckedAt: $entry['tests_checked_at'],
         url: $entry['url'],
         visibility: null,
-        status: 'live',
+        status: ProjectStatus::Live,
     ));
 });
 
@@ -57,4 +58,11 @@ it('rejects a project with neither a url nor a visibility label', function () us
 
     expect(fn (): Project => Project::fromArray($entry))
         ->toThrow(InvalidProjectException::class, 'needs a url or a visibility label');
+});
+
+it('names the slug and the value when the status is unknown', function () use ($validEntry): void {
+    $entry = [...$validEntry(), 'status' => fake()->word()];
+
+    expect(fn (): Project => Project::fromArray($entry))
+        ->toThrow(InvalidProjectException::class, sprintf('Portfolio project "%s" has an unknown status "%s".', $entry['slug'], $entry['status']));
 });
