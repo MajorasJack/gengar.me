@@ -38,5 +38,15 @@ jobs:
       - name: Larastan
         run: vendor/bin/phpstan analyse --no-progress --memory-limit=512M
 
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 'lts/*'
+          cache: npm
+
+      - name: Build assets
+        run: |
+          npm ci
+          npm run build
+
       - name: Pest
         run: vendor/bin/pest
