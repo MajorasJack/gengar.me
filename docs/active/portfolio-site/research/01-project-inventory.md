@@ -19,7 +19,7 @@ Gathered from the local repos under `~/Work` (README, `composer.json`, `package.
 - Shopify image optimiser (`~/Work/shopify-image-optimiser`): PHP CLI on AWS Lambda that compresses images and suggests alt text with Claude for a person to approve. ~115 PHPUnit tests.
 
 ## Excluded
-Tech tests and employer work, WordPress client sites (`njmovers`, `unusualhorror`), marketing folders, `conventionator` (another person's repo), `Music-Metadata-App` (generated with v0) and `FormatShopifyAddresses` (stale).
+Tech tests and employer work, WordPress client sites (two client and shop sites), marketing folders, `conventionator` (another person's repo), `Music-Metadata-App` (generated with v0) and `FormatShopifyAddresses` (stale).
 
 ## Server
 `ssh cyberpanel` hosts `gengar.me` (placeholder), `darkroom`, `larder`, `larder-staging`, `movies` and `accounting` subdomains, and `drinksafe.app`. PHP 8.2 to 8.5 are installed as `lsphp`; sibling sites use `lsphp84`.
