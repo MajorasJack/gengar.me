@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fail if secrets are tracked
+        run: |
+          tracked=$(git ls-files | grep -E '(^|/)(\.env(\..+)?|[^/]*\.pem|id_[^/]*)$' | grep -vE '(^|/)\.env\.example$' || true)
+          if [ -n "$tracked" ]; then
+            echo "These files must not be committed:"
+            echo "$tracked"
+            exit 1
+          fi
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Pint
+        run: vendor/bin/pint --test
+
+      - name: Larastan
+        run: vendor/bin/phpstan analyse --no-progress --memory-limit=512M
+
+      - name: Pest
+        run: vendor/bin/pest
