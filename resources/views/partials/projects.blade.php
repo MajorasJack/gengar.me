@@ -16,7 +16,7 @@
                     @endif
                     <td role="cell" data-label="what it does">{{ $project->summary }}</td>
                     <td class="stack" role="cell" data-label="stack"><span>@foreach ($project->stack as $item)@if (! $loop->first)&nbsp;· @endif<span>{{ $item }}</span>@endforeach</span></td>
-                    <td class="tests" role="cell" data-label="tests">~{{ number_format($project->tests) }}</td>
+                    <td class="tests" role="cell" data-label="tests"><span>~{{ number_format($project->tests) }}@if ($project->testCases !== null && $project->testCases !== $project->tests) <span class="cases">({{ number_format($project->testCases) }} cases)</span>@endif</span></td>
                 </tr>
             @endforeach
         </tbody>

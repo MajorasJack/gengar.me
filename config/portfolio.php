@@ -33,16 +33,19 @@ return [
     ],
 
     // Keys per entry: slug, name, summary, stack (list), tests (int, approximate),
-    // tests_checked_at (Y-m-d), url (nullable), visibility (label when url is null),
-    // status (live or private), detail (problem, built, notes; S3). Test counts are the
-    // PHP suite as listed by `pest --list-tests`.
+    // test_cases (nullable int), tests_checked_at (Y-m-d), url (nullable), visibility
+    // (label when url is null), status (live or private), detail (problem, built, notes; S3).
+    // Both counts come from the PHP suite's `pest --list-tests`. tests is the number of test
+    // functions, and test_cases is the number of cases with each dataset row counted, set
+    // only where it is more than about 10% higher.
     'projects' => [
         [
             'slug' => 'promotr',
             'name' => 'Promotr',
             'summary' => 'Event management for live-music promoters: budgets, tours, artists, contracts and ticketing.',
             'stack' => ['Laravel 12', 'Inertia 2', 'Vue 3', 'Reverb', 'Meilisearch', 'Cashier'],
-            'tests' => 30945,
+            'tests' => 29753,
+            'test_cases' => 30945,
             'tests_checked_at' => '2026-10-18',
             'url' => 'https://promotr.co',
             'visibility' => null,
@@ -53,7 +56,8 @@ return [
             'name' => 'Larder',
             'summary' => 'Household recipes and pantry app that imports recipes with Claude, matches them to stock and builds the shopping list.',
             'stack' => ['Laravel 13', 'PostgreSQL', 'Vue 3', 'Passkeys', 'Anthropic API'],
-            'tests' => 1741,
+            'tests' => 1501,
+            'test_cases' => 1781,
             'tests_checked_at' => '2026-10-18',
             'url' => null,
             'visibility' => 'private beta',
@@ -64,7 +68,8 @@ return [
             'name' => 'Darkroom',
             'summary' => 'Image tools: background removal, upscaling, conversion, compression and image to PDF.',
             'stack' => ['Laravel 13', 'Inertia 3', 'Vue 3', 'Python FastAPI', 'pyvips', 'ONNX'],
-            'tests' => 165,
+            'tests' => 147,
+            'test_cases' => 165,
             'tests_checked_at' => '2026-10-18',
             'url' => 'https://darkroom.gengar.me',
             'visibility' => null,
@@ -75,7 +80,8 @@ return [
             'name' => 'DrinkSafe',
             'summary' => 'Community drink-spiking reports, venue safety scores and an incident heatmap.',
             'stack' => ['Laravel 13', 'Inertia 3', 'Vue 3', 'Leaflet', 'Turnstile'],
-            'tests' => 512,
+            'tests' => 449,
+            'test_cases' => 512,
             'tests_checked_at' => '2026-10-18',
             'url' => 'https://drinksafe.app',
             'visibility' => null,
@@ -86,7 +92,8 @@ return [
             'name' => 'Movies',
             'summary' => 'Catalogue for a physical film collection, filled in from a barcode scan.',
             'stack' => ['Laravel 13', 'Inertia 3', 'React 19', 'TMDB', 'OMDb'],
-            'tests' => 2423,
+            'tests' => 2316,
+            'test_cases' => null,
             'tests_checked_at' => '2026-10-18',
             'url' => 'https://movies.gengar.me',
             'visibility' => null,
@@ -124,5 +131,6 @@ return [
         '7af37550d5c99366bca0c153fa839bf4cf0a8dbfce550a3634b8d5fd7901a1e4',
         '27e996e51c8e94898d9897fb1ae884bf5548c3dfaee79b95af506b167e260696',
         '9ab9d868c868bcb37cc8f5b9b1a6759426ac9914f5e9c4b5b451946ce0c1cfa8',
+        'adf829976c676ace912a99d504555b40528d88412299df855dfaeaf52c3cede1',
     ],
 ];
