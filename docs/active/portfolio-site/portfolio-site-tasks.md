@@ -36,7 +36,7 @@ The app has no database (ADR-001). These rules still apply:
 - [x] **S0-06** (#4) Create `config/portfolio.php` with the shape from ADR-003 and a `Project` readonly value object with `fromArray()`; validate required keys and throw a clear exception on a missing one · Req: CONT-3 · Files: `config/portfolio.php`, `app/Portfolio/Project.php`, `tests/Unit/Portfolio/ProjectTest.php` · `routine` · Done when unit tests cover a valid entry, a private entry with no URL, and a missing-key exception.
 
 **S0 review checkpoint**
-- [ ] `feature-dev:code-reviewer` review; Critical and High findings fixed
+- [x] `feature-dev:code-reviewer` review; Critical and High findings fixed (#5: `/up` third-party assets fixed; route list pinned; checks run on every public response)
 - [ ] Demo: CI green; `/` renders the layout with no cookies set
 - [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
 
@@ -122,6 +122,6 @@ Server changes are outward-facing. Confirm with Jack before replacing `public_ht
 - [ ] **S4-04** Run Lighthouse (mobile) on the live homepage and one detail page; fix anything below target · Req: NFR-2 · Files: as needed · `routine` · Done when scores are at least 95 performance and 100 accessibility, recorded in context.
 
 **S4 review checkpoint**
-- [ ] `feature-dev:code-reviewer` review; Critical and High findings fixed
+- [x] `feature-dev:code-reviewer` review; Critical and High findings fixed (#5: `/up` third-party assets fixed; route list pinned; checks run on every public response)
 - [ ] Demo: paste the URL into Slack and see the preview card; Lighthouse report meets targets
 - [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
