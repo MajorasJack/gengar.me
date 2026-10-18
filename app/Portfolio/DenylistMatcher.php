@@ -13,8 +13,8 @@ use Illuminate\Support\Collection;
  */
 final readonly class DenylistMatcher
 {
-    /** The longest name, in words, that matches() can find. */
-    public const int MAX_WORDS = 4;
+    /** The longest name, in words, that matches() can find. Six leaves room for a four-word name an apostrophe splits. */
+    public const int MAX_WORDS = 6;
 
     /**
      * @param  list<string>  $hashes  lowercase hex SHA-256 hashes of normalised names

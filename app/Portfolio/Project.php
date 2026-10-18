@@ -31,7 +31,7 @@ final readonly class Project
      *
      * @param  array<string, mixed>  $entry
      *
-     * @throws InvalidProjectException when a required key is missing, the status is unknown, or there is neither a url nor a visibility label
+     * @throws InvalidProjectException when a required key is missing, the status is unknown, there is neither a url nor a visibility label, or the url is not an https url with a host
      */
     public static function fromArray(array $entry): self
     {
@@ -43,6 +43,10 @@ final readonly class Project
 
         if (($entry['url'] ?? null) === null && ($entry['visibility'] ?? null) === null) {
             throw InvalidProjectException::missingUrlAndVisibility($entry['slug']);
+        }
+
+        if (($entry['url'] ?? null) !== null && (parse_url($entry['url'], PHP_URL_SCHEME) !== 'https' || ! parse_url($entry['url'], PHP_URL_HOST))) {
+            throw InvalidProjectException::invalidUrl(slug: $entry['slug'], url: $entry['url']);
         }
 
         return new self(
