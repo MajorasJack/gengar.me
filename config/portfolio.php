@@ -101,6 +101,28 @@ return [
         ['name' => 'Shopify image optimiser', 'description' => 'Compresses product images and drafts alt text with Claude for a person to approve.'],
     ],
 
-    // Names that must never appear on a public page (CONT-6). Filled in S1-05.
-    'denylist' => [],
+    // Names that must never appear on a public page (CONT-6). Entries are SHA-256 hashes of each normalised name, so the public repo does not list them; add one with `php artisan portfolio:denylist-hash "Name"`.
+    // TODO(owner): Jack to confirm this list: every employer in the CV profile, then the shop and label names and their domains.
+    'denylist' => [
+        '25b6ae267dcdfdd1318176b0db5cb494a6c5156d378cea3bd5bccec582b6dd57',
+        'd4a1d34e9688072e6971e4ef5541a7aea76e866b11c9bd0a56709f1c4f78f275',
+        'ec523907ed47fcbd07c248a4afe4adf139e1583ea3adc22c9118d905af37e697',
+        '86894d3b258af6db2d838db5f7652618f1aaa951e9a5920af989ce29eed562ec',
+        'fd338981954ffc21aa5eb9dd79627782ae0e4b54eba595aeabf7303ffb03b8f4',
+        '8bdc770db0c1d846eb52a72b75945f9047edf8e4f81433e79fc7be789b1feb18',
+        'e9760f73ad19d8b13d30b4ff6c7e0a6d516517e513eeae912e76ace7afbc9685',
+        'b9597898af1236caa29ad01317de021bd034082b22c8a70ed0362cc06ba71aeb',
+        'c5de7d1e09535e2845bb315a766da1cfb5ea711fe43b8b8391d4e00c96c6b79e',
+        '656d84e0dabc849f6124a80fb219b1cff2f1a252ad6866537927a9e8daf4fdf8',
+        'ebf8aed8629d5b19cf3af0814c28ae278fb3cc7946700db793d95d4a4ba97717',
+        '41fd1dbb96da5184ebc5fb9174c9297e01a056ac7814506b83e544c16876c4ef',
+        'f55a85b2f2eb0790b99de47ae3e845fb3132aa8a892354ef4acb332a9473eeb9',
+        '756b43f0fd64216e81ac3ed1e45dae0ba8afa51a5c1464244812588332b4323d',
+        '8a4e7a37870eeafb3a6d09f9e987bb4b2b4f08e97bc4dcb89fba65c6f785a615',
+        'fa49239287478e67ed1b492f9868ef52322d735d994925a66d6071e566ba621a',
+        '578027d8eb97a008d2a4b26ac17f782ea93ed91dd2936e6d5e048fcb2d995530',
+        '7af37550d5c99366bca0c153fa839bf4cf0a8dbfce550a3634b8d5fd7901a1e4',
+        '27e996e51c8e94898d9897fb1ae884bf5548c3dfaee79b95af506b167e260696',
+        '9ab9d868c868bcb37cc8f5b9b1a6759426ac9914f5e9c4b5b451946ce0c1cfa8',
+    ],
 ];
