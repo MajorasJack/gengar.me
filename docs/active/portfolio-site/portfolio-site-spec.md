@@ -117,7 +117,7 @@ Notation is EARS. Mockup reference is direction C in the published mockups (see 
 | 4 | ~~Should the site include a photo of Jack?~~ Answered 2026-10-18 | - | No photo |
 | 5 | ~~Light or dark when the system has no preference?~~ Answered 2026-10-18 | - | Dark (direction C) |
 | 6 | ~~Should the pre-orders app link anywhere?~~ Answered 2026-10-18 | - | No link, like the other smaller tools |
-| 7 | ~~Which names belong on the CONT-6 denylist?~~ Answered 2026-10-18 | - | Every employer in the CV profile plus Unusual Horror and its shop names |
+| 7 | ~~Which names belong on the CONT-6 denylist?~~ Answered 2026-10-18 | - | Every employer in the CV profile plus Jack's own shop and label brands (stored as hashes, see S1-05) |
 
 ## 9. Glossary
 | Term | Meaning |
