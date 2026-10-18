@@ -94,7 +94,12 @@ return [
         ],
     ],
 
-    'smaller_tools' => [],
+    // Personal tools tied to Jack's own shops: no links, and no shop, store or supplier names (CONT-5).
+    'smaller_tools' => [
+        ['name' => 'Invoice Inbox', 'description' => 'Reads supplier invoices from Gmail with Claude and posts them to Xero.'],
+        ['name' => 'Pre-orders Shopify app', 'description' => 'Pre-order and back-in-stock app with a storefront extension.'],
+        ['name' => 'Shopify image optimiser', 'description' => 'Compresses product images and drafts alt text with Claude for a person to approve.'],
+    ],
 
     // Names that must never appear on a public page (CONT-6). Filled in S1-05.
     'denylist' => [],
