@@ -10,8 +10,20 @@ declare(strict_types=1);
 return [
     'available' => true,
 
-    // Filled in S1-01 and S1-02.
-    'profile' => [],
+    'profile' => [
+        'name' => 'Jack Evans',
+        'role' => 'senior PHP / Laravel engineer',
+        'location' => 'Manchester, UK',
+        'remote' => 'remote-first',
+        // TODO(owner): S1-02 replaces this draft from mockup C with Jack's intro (70 words at most).
+        'intro' => 'Fourteen years building APIs, integrations and the databases underneath them, in healthcare SaaS, food delivery, legal tech and e-commerce. I like owning a problem end to end, from the design doc to the measured result.',
+        'email' => 'jack@gengar.me',
+        'linkedin' => 'https://www.linkedin.com/in/jack-evans-2526a1a3',
+        'github' => 'https://github.com/MajorasJack',
+        'cv' => '/cv.pdf',
+    ],
+
+    // Filled in S1-02.
     'what_i_do' => [],
 
     // Keys per entry: slug, name, summary, stack (list), tests (int, approximate),
