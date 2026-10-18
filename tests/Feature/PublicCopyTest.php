@@ -13,3 +13,8 @@ it('shows no performance figure', function (string $uri): void {
     expect(html_entity_decode($this->get($uri)->getContent()))
         ->not->toMatch('/\d+(\.\d+)?s\s*→\s*\d/u');
 })->with('public responses');
+
+it('shows no phone number', function (string $uri): void {
+    expect(html_entity_decode($this->get($uri)->getContent()))
+        ->not->toMatch('/\+?\d(?:[\s().-]*\d){9,}/');
+})->with('public responses');
