@@ -13,7 +13,7 @@ $validEntry = fn (): array => [
     'stack' => fake()->words(3),
     'tests' => fake()->numberBetween(1, 9000),
     'tests_checked_at' => fake()->date(),
-    'url' => fake()->url(),
+    'url' => sprintf('https://%s', fake()->domainName()),
     'visibility' => null,
     'status' => 'live',
 ];
@@ -59,6 +59,16 @@ it('rejects a project with neither a url nor a visibility label', function () us
     expect(fn (): Project => Project::fromArray($entry))
         ->toThrow(InvalidProjectException::class, 'needs a url or a visibility label');
 });
+
+it('names the slug and the value when the url is not https with a host', function (string $url) use ($validEntry): void {
+    $entry = [...$validEntry(), 'url' => $url];
+
+    expect(fn (): Project => Project::fromArray($entry))
+        ->toThrow(InvalidProjectException::class, sprintf('Portfolio project "%s" has an invalid url "%s"', $entry['slug'], $url));
+})->with([
+    'no scheme or host' => fn (): string => fake()->domainName(),
+    'http' => fn (): string => sprintf('http://%s', fake()->domainName()),
+]);
 
 it('names the slug and the value when the status is unknown', function () use ($validEntry): void {
     $entry = [...$validEntry(), 'status' => fake()->word()];

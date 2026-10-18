@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Portfolio\Project;
 
-$portfolio = require dirname(__DIR__, 3).'/config/portfolio.php';
+$portfolio = require sprintf('%s/config/portfolio.php', dirname(__DIR__, 3));
 
 test('there are five featured projects', function () use ($portfolio): void {
     expect($portfolio['projects'])->toHaveCount(5);

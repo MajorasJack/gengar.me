@@ -66,24 +66,26 @@ it('labels the CV button', function (): void {
 });
 
 it('lists the featured projects in config order', function (): void {
+    $names = [fake()->lexify('??????????'), fake()->lexify('??????????')];
+    rsort($names);
     config(['portfolio.projects' => [
-        ['slug' => fake()->unique()->slug(), 'name' => 'Zebra', 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => fake()->url(), 'visibility' => null, 'status' => 'live'],
-        ['slug' => fake()->unique()->slug(), 'name' => 'Aardvark', 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => fake()->url(), 'visibility' => null, 'status' => 'live'],
+        ['slug' => fake()->unique()->slug(), 'name' => $names[0], 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => sprintf('https://%s', fake()->domainName()), 'visibility' => null, 'status' => 'live'],
+        ['slug' => fake()->unique()->slug(), 'name' => $names[1], 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => sprintf('https://%s', fake()->domainName()), 'visibility' => null, 'status' => 'live'],
     ]]);
 
-    $this->get('/')->assertOk()->assertSeeInOrder(['running projects', 'Zebra', 'Aardvark']);
+    $this->get('/')->assertOk()->assertSeeInOrder(['running projects', $names[0], $names[1]]);
 });
 
 it('shows each project summary, stack and approximate test count', function (): void {
     config(['portfolio.projects' => [
-        ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13', 'Vue 3', 'Reverb'], 'tests' => 30945, 'tests_checked_at' => '2026-10-18', 'url' => fake()->url(), 'visibility' => null, 'status' => 'live'],
+        ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13', 'Vue 3', 'Reverb'], 'tests' => 30945, 'tests_checked_at' => '2026-10-18', 'url' => sprintf('https://%s', fake()->domainName()), 'visibility' => null, 'status' => 'live'],
     ]]);
 
     $this->get('/')->assertOk()->assertSeeInOrder([
         config('portfolio.projects.0.summary'),
-        'Laravel 13 · Vue 3 · Reverb',
+        '<span>Laravel 13</span>&nbsp;· <span>Vue 3</span>&nbsp;· <span>Reverb</span>',
         '~30,945',
-    ]);
+    ], escape: false);
 });
 
 it('links a public project by its host', function (): void {
@@ -112,6 +114,14 @@ it('marks a private project with the off status dot', function (): void {
     $this->get('/')->assertOk()->assertSee('<span class="dot off" aria-hidden="true"></span>', escape: false);
 });
 
+it('marks a live project with the on status dot', function (): void {
+    config(['portfolio.projects' => [
+        ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => sprintf('https://%s', fake()->domainName()), 'visibility' => null, 'status' => 'live'],
+    ]]);
+
+    $this->get('/')->assertOk()->assertSee('<span class="dot" aria-hidden="true"></span>', escape: false);
+});
+
 it('labels each project cell for the stacked mobile layout', function (string $label): void {
     $this->get('/')->assertOk()->assertSee(sprintf('data-label="%s"', $label), escape: false);
 })->with(['host', 'what it does', 'stack', 'tests']);
@@ -134,6 +144,6 @@ it('lists the smaller tools without links', function (): void {
     $tools = Str::between($this->get('/')->assertOk()->getContent(), 'id="smaller-tools"', '</section>');
 
     expect($tools)
-        ->toContain(e(config('portfolio.smaller_tools.0.name')), e(config('portfolio.smaller_tools.0.description')), e(config('portfolio.smaller_tools.1.name')))
+        ->toContain(e(config('portfolio.smaller_tools.0.name')), e(config('portfolio.smaller_tools.0.description')), e(config('portfolio.smaller_tools.1.name')), e(config('portfolio.smaller_tools.1.description')))
         ->not->toContain('<a ');
 });

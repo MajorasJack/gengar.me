@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$stylesheet = file_get_contents(dirname(__DIR__, 2).'/resources/css/app.css');
+$stylesheet = file_get_contents(sprintf('%s/resources/css/app.css', dirname(__DIR__, 2)));
 
 preg_match_all('/--colour-([a-z-]+):\s*(#[0-9a-f]{6});/', $stylesheet, $matches);
 $colours = array_combine($matches[1], $matches[2]);

@@ -14,6 +14,12 @@ class PortfolioController extends Controller
      */
     public function home(): View
     {
-        return view('home', ['projects' => array_map(Project::fromArray(...), config('portfolio.projects'))]);
+        return view('home', [
+            'profile' => config('portfolio.profile'),
+            'available' => config('portfolio.available'),
+            'areas' => config('portfolio.what_i_do'),
+            'projects' => array_map(Project::fromArray(...), config('portfolio.projects')),
+            'tools' => config('portfolio.smaller_tools'),
+        ]);
     }
 }

@@ -15,7 +15,7 @@
                         <td class="host" role="cell" data-label="host"><a href="{{ $project->url }}">{{ parse_url($project->url, PHP_URL_HOST) }}</a></td>
                     @endif
                     <td role="cell" data-label="what it does">{{ $project->summary }}</td>
-                    <td class="stack" role="cell" data-label="stack">{{ implode(' · ', $project->stack) }}</td>
+                    <td class="stack" role="cell" data-label="stack"><span>@foreach ($project->stack as $item)@if (! $loop->first)&nbsp;· @endif<span>{{ $item }}</span>@endforeach</span></td>
                     <td class="tests" role="cell" data-label="tests">~{{ number_format($project->tests) }}</td>
                 </tr>
             @endforeach

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Portfolio\DenylistMatcher;
+
 it('prints the hash of the lowercased, trimmed name', function (): void {
     $name = fake()->lexify('????????');
 
@@ -11,6 +13,6 @@ it('prints the hash of the lowercased, trimmed name', function (): void {
 });
 
 it('refuses a name longer than the matcher can find', function (): void {
-    $this->artisan('portfolio:denylist-hash', ['name' => fake()->words(5, true)])
+    $this->artisan('portfolio:denylist-hash', ['name' => fake()->words(DenylistMatcher::MAX_WORDS + 1, true)])
         ->assertFailed();
 });

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$portfolio = require dirname(__DIR__, 2).'/config/portfolio.php';
+$portfolio = require sprintf('%s/config/portfolio.php', dirname(__DIR__, 2));
 
 test('the intro is no longer than 70 words', function () use ($portfolio): void {
     expect(count(preg_split('/\s+/', trim($portfolio['profile']['intro']))))->toBeLessThanOrEqual(70);

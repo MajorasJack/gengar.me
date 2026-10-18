@@ -32,6 +32,13 @@ it('finds a multi-word name containing an ampersand', function (): void {
         ->toBe([DenylistMatcher::hash($name)]);
 });
 
+it('finds a four-word name containing an apostrophe', function (): void {
+    $name = sprintf("%s O'%s %s %s", fake()->lexify('?????'), fake()->lexify('?????'), fake()->lexify('?????'), fake()->lexify('?????'));
+
+    expect(new DenylistMatcher([DenylistMatcher::hash($name)])->matches(sprintf('<p>Worked at %s.</p>', e($name))))
+        ->toBe([DenylistMatcher::hash($name)]);
+});
+
 it('finds a name split across tags', function (): void {
     $first = fake()->lexify('??????');
     $second = fake()->lexify('??????');

@@ -25,6 +25,14 @@ class InvalidProjectException extends InvalidArgumentException
     }
 
     /**
+     * A project's url has no host or is not https, so the page would render a broken link.
+     */
+    public static function invalidUrl(string $slug, string $url): self
+    {
+        return new self(sprintf('Portfolio project "%s" has an invalid url "%s"; it needs an https scheme and a host.', $slug, $url));
+    }
+
+    /**
      * A project's status is not one the page knows how to show.
      */
     public static function unknownStatus(string $slug, string $status): self

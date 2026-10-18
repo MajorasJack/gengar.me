@@ -255,6 +255,11 @@ td.stack {
     font-size: 0.74rem;
 }
 
+/* One wrapper keeps the stacked layout's grid to two cells; each item inside never breaks (UI-3). */
+td.stack > span > span {
+    white-space: nowrap;
+}
+
 th.tests,
 td.tests {
     text-align: right;
