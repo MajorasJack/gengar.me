@@ -34,6 +34,18 @@ it('links the email address with mailto', function (): void {
     $this->get('/')->assertOk()->assertSee('<a href="mailto:jack@gengar.me">jack@gengar.me</a>', escape: false);
 });
 
+it('shows available for work while the flag is on', function (): void {
+    config(['portfolio.available' => true]);
+
+    $this->get('/')->assertOk()->assertSeeText('available for work');
+});
+
+it('omits available for work while the flag is off', function (): void {
+    config(['portfolio.available' => false]);
+
+    $this->get('/')->assertOk()->assertDontSeeText('available for work');
+});
+
 it('renders each what I do area from config', function (): void {
     config(['portfolio.what_i_do' => [
         ['title' => fake()->words(2, true), 'description' => fake()->sentence()],
