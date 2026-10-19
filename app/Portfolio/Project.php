@@ -12,7 +12,7 @@ final readonly class Project
 
     /**
      * @param  list<string>  $stack
-     * @param  array{problem?: string, built?: string, notes?: list<string>}|null  $detail
+     * @param  array{overview?: string, problem?: string, built?: string, notes?: list<string>}|null  $detail
      */
     public function __construct(
         public string $slug,
@@ -25,6 +25,7 @@ final readonly class Project
         public ?string $visibility,
         public ProjectStatus $status,
         public ?array $detail = null,
+        public ?string $source = null,
     ) {}
 
     /**
@@ -63,6 +64,7 @@ final readonly class Project
             status: ProjectStatus::tryFrom($entry['status'])
                 ?? throw InvalidProjectException::unknownStatus(slug: $entry['slug'], status: $entry['status']),
             detail: $entry['detail'] ?? null,
+            source: $entry['source'] ?? null,
         );
     }
 }

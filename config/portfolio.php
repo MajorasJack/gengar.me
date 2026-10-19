@@ -38,7 +38,8 @@ return [
 
     // Keys per entry: slug, name, summary, stack (list), tests (int, approximate),
     // tests_checked_at (Y-m-d), url (nullable), visibility (label when url is null),
-    // status (live or private), detail (problem, built, notes; S3). tests is the number of
+    // status (live or private), detail (overview, problem, built, notes; S3), source (public repo url,
+    // optional). tests is the number of
     // test functions in the PHP suite, from `pest --list-tests` with dataset rows collapsed.
     'projects' => [
         [
@@ -51,6 +52,18 @@ return [
             'url' => 'https://promotr.co',
             'visibility' => null,
             'status' => 'live',
+            'detail' => [
+                'overview' => 'Promotr is an event management platform for live-music promoters, booking agents, venues and artists. It brings event and tour budgets, artist bookings, contracts, tasks and ticket sales into one place, with public pages for events, brands and artists.',
+                'problem' => 'Promoters run shows from spreadsheets and separate tools, and an event\'s budget keeps moving until the night itself.',
+                'built' => 'A modular, multi-tenant Laravel 12 app with an Inertia and Vue 3 front end, built AI-first with Claude Code. Search runs on Meilisearch, billing on Cashier and live updates on Reverb.',
+                'notes' => [
+                    'A modular codebase of over 50 modules, each with its own tests.',
+                    'Each organisation\'s data is kept separate, with role-based access for its team.',
+                    'Ticket sales come in from outside ticketing platforms, so a budget tracks real revenue.',
+                    'Events, brands and artists can be published on their own web address (domain).',
+                    'Notifications arrive in real time over WebSockets.',
+                ],
+            ],
         ],
         [
             'slug' => 'larder',
@@ -62,6 +75,18 @@ return [
             'url' => null,
             'visibility' => 'private beta',
             'status' => 'private',
+            'detail' => [
+                'overview' => 'Larder is a recipe and pantry app for a household, used on the phone from the Home Screen. It saves recipes from websites, social media, photos and videos, keeps track of what is in the fridge and cupboards, suggests what to cook before food expires, and builds the shopping list from what is running low. It is in private beta, by invite.',
+                'problem' => 'Recipe apps ignore what is in the cupboards, and pantry apps fail because keeping them up to date is a chore.',
+                'built' => 'A modular Laravel 13 API on PostgreSQL with a Vue 3 single-page app, installed as a PWA and built AI-first with Claude Code. Recipe imports use Claude and video imports use Gemini. Sign-in is passwordless, with passkeys first.',
+                'notes' => [
+                    'AI imports always end in a step where a person confirms or edits the result.',
+                    'Cooking a recipe updates the stock, so the pantry stays accurate without extra upkeep.',
+                    'The shopping list and quick stock changes work offline on a phone and sync when the signal returns.',
+                    'Ingredients are matched to the pantry automatically, and a correction is remembered for next time.',
+                    'Use-by and best-before dates are kept apart and never shown the same way.',
+                ],
+            ],
         ],
         [
             'slug' => 'darkroom',
@@ -73,6 +98,18 @@ return [
             'url' => 'https://darkroom.gengar.me',
             'visibility' => null,
             'status' => 'live',
+            'detail' => [
+                'overview' => 'Darkroom is a set of image tools in one invite-only web app. It removes backgrounds and objects, upscales photos, converts and compresses images, blurs faces, reads text with OCR and turns images into PDFs.',
+                'problem' => 'Online image tools upload people\'s photos to someone else\'s server, and the popular ones charge for their full features.',
+                'built' => 'A Laravel 13 app with an Inertia and Vue 3 front end, built AI-first with Claude Code, and a Python FastAPI service that does the image processing with pyvips and ONNX models.',
+                'notes' => [
+                    'Image processing is split between a server service and the browser.',
+                    'Upscaling and object removal run in the browser, on WebGPU where the device has it, so those photos never leave the device.',
+                    'Location and camera details are removed from every result.',
+                    'Uploads are kept only as long as the job needs them.',
+                    'A batch of files comes back as a single download.',
+                ],
+            ],
         ],
         [
             'slug' => 'drinksafe',
@@ -84,6 +121,19 @@ return [
             'url' => 'https://drinksafe.app',
             'visibility' => null,
             'status' => 'live',
+            'source' => 'https://github.com/MajorasJack/drinksafe.app',
+            'detail' => [
+                'overview' => 'DrinkSafe is a public website where people can report, anonymously, a venue where they were spiked. Anyone can search venues, see each venue\'s safety score and reports, and view an incident heatmap, with links to the police throughout.',
+                'problem' => 'People who have been spiked at a venue may want to warn others without going on record. DrinkSafe is informational, not a way to report a crime.',
+                'built' => 'A modular Laravel 13 app with Inertia and Vue 3, rebuilt from an earlier React version, with the front end built AI-first with Claude Code. Maps use Leaflet, and venues come from OpenStreetMap.',
+                'notes' => [
+                    'Reports are anonymous. Each one is checked for email addresses and phone numbers before it is saved, and submissions go through Cloudflare Turnstile.',
+                    'A venue\'s safety score weights each report by age, halving every 90 days. Reports over a year old are left out, and a score needs at least three reports.',
+                    'The heatmap groups reports into cells of about 100 metres and hides any cell with fewer than three reports, to protect privacy.',
+                    'Records use UUID keys rather than counting IDs, for anonymity.',
+                    'Pest 4 browser tests run alongside the feature and unit tests.',
+                ],
+            ],
         ],
         [
             'slug' => 'movies',
@@ -95,6 +145,18 @@ return [
             'url' => 'https://movies.gengar.me',
             'visibility' => null,
             'status' => 'live',
+            'detail' => [
+                'overview' => 'Movies is a catalogue for a physical film collection: DVD, Blu-ray, 4K Ultra HD, VHS, LaserDisc and other disc and tape formats. Scanning a barcode on a phone adds an edition to the collection, and a wantlist tracks what is still to find. The catalogue of films and editions is shared, and signed-in members can add to it.',
+                'problem' => 'Film databases list films, not the editions on a shelf, and a barcode identifies an edition rather than a film.',
+                'built' => 'A modular Laravel 13 app on PostgreSQL with an Inertia and React 19 front end, built AI-first with Claude Code. Film details come from TMDB and OMDb.',
+                'notes' => [
+                    'Films and their physical editions are recorded separately, so a re-release, a special edition and a box set each have their own entry.',
+                    'Barcode scanning works in the phone browser, with no app to install.',
+                    'Film and barcode lookups try several sources in turn, and scanning keeps working when one is unavailable.',
+                    'New editions are checked before they appear in the shared catalogue, and duplicate editions can be merged and the merge undone.',
+                    'Each copy records its condition, from sealed to damaged.',
+                ],
+            ],
         ],
     ],
 
