@@ -60,3 +60,15 @@ test('every link shows a focus ring', function () use ($stylesheet): void {
 test('no rule removes the focus outline', function () use ($stylesheet): void {
     expect($stylesheet)->not->toMatch('/outline(-style|-width)?:\s*(none|0)\b/');
 });
+
+test('every colour token the stylesheet uses is defined in both palettes', function () use ($stylesheet, $palettes): void {
+    preg_match_all('/var\(--colour-([a-z-]+)\)/', $stylesheet, $used);
+
+    expect(array_values(array_diff(array_unique($used[1]), array_keys($palettes['dark']))))->toBe([])
+        ->and(array_values(array_diff(array_unique($used[1]), array_keys($palettes['light']))))->toBe([]);
+});
+
+test('no colour is set outside the palette tokens', function () use ($stylesheet): void {
+    expect(preg_replace('/^\s*--colour-[a-z-]+:\s*#[0-9a-f]{6};$/m', '', $stylesheet))
+        ->not->toMatch('/#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?)\(/');
+});
