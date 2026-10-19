@@ -430,6 +430,19 @@ td.tests {
     color: var(--colour-accent);
 }
 
+/* The width and height attributes give the box its ratio before the image loads, so nothing shifts. */
+.screenshot {
+    margin: 0;
+}
+
+.screenshot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--colour-line);
+    border-radius: var(--radius);
+}
+
 /* Footer */
 .site-footer {
     padding-top: 18px;

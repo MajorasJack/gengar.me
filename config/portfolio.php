@@ -39,8 +39,8 @@ return [
     // Keys per entry: slug, name, summary, stack (list), tests (int, approximate),
     // tests_checked_at (Y-m-d), url (nullable), visibility (label when url is null),
     // status (live or private), detail (overview, problem, built, notes; S3), source (public repo url,
-    // optional). tests is the number of
-    // test functions in the PHP suite, from `pest --list-tests` with dataset rows collapsed.
+    // optional), screenshot (src, alt, width, height of a WebP in public/images/projects; optional).
+    // tests is the number of test functions in the PHP suite, from `pest --list-tests` with dataset rows collapsed.
     'projects' => [
         [
             'slug' => 'promotr',
@@ -52,6 +52,12 @@ return [
             'url' => 'https://promotr.co',
             'visibility' => null,
             'status' => 'live',
+            'screenshot' => [
+                'src' => '/images/projects/promotr.webp',
+                'alt' => 'Promotr\'s Go Live dialog: a publishing readiness checklist with tickets, artists, venue and status all ticked, above the event\'s own promotr.co web address.',
+                'width' => 1600,
+                'height' => 900,
+            ],
             'detail' => [
                 'overview' => 'Promotr is an event management platform for live-music promoters, booking agents, venues and artists. It brings event and tour budgets, artist bookings, contracts, tasks and ticket sales into one place, with public pages for events, brands and artists.',
                 'problem' => 'Promoters run shows from spreadsheets and separate tools, and an event\'s budget keeps moving until the night itself.',
@@ -122,6 +128,12 @@ return [
             'visibility' => null,
             'status' => 'live',
             'source' => 'https://github.com/MajorasJack/drinksafe.app',
+            'screenshot' => [
+                'src' => '/images/projects/drinksafe.webp',
+                'alt' => 'The DrinkSafe homepage, headed "Community awareness for safer nights out", with a venue search for Manchester and links to browse the map or share a report.',
+                'width' => 1600,
+                'height' => 900,
+            ],
             'detail' => [
                 'overview' => 'DrinkSafe is a public website where people can report, anonymously, a venue where they were spiked. Anyone can search venues, see each venue\'s safety score and reports, and view an incident heatmap, with links to the police throughout.',
                 'problem' => 'People who have been spiked at a venue may want to warn others without going on record. DrinkSafe is informational, not a way to report a crime.',

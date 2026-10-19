@@ -159,3 +159,28 @@ it('sets no cookies on the rename redirect', function (): void {
 it('asks proxies not to transform the rename redirect', function (): void {
     expect($this->get('/projects/movies')->headers->get('Cache-Control'))->toContain('no-transform');
 });
+
+it('shows the screenshot with its alt text, dimensions and lazy loading', function (): void {
+    config(['portfolio.projects.0.screenshot' => [
+        'src' => sprintf('/images/projects/%s.webp', fake()->slug(1)),
+        'alt' => fake()->sentence(),
+        'width' => fake()->numberBetween(100, 2000),
+        'height' => fake()->numberBetween(100, 2000),
+    ]]);
+
+    $this->get('/projects/promotr')
+        ->assertOk()
+        ->assertSee(sprintf(
+            '<img src="%s" alt="%s" width="%d" height="%d" loading="lazy" decoding="async">',
+            e(config('portfolio.projects.0.screenshot.src')),
+            e(config('portfolio.projects.0.screenshot.alt')),
+            config('portfolio.projects.0.screenshot.width'),
+            config('portfolio.projects.0.screenshot.height'),
+        ), escape: false);
+});
+
+it('shows no image for a project without a screenshot', function (): void {
+    config(['portfolio.projects.0.screenshot' => null]);
+
+    $this->get('/projects/promotr')->assertOk()->assertDontSee('<img', escape: false);
+});
