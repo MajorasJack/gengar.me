@@ -63,4 +63,4 @@ Reference material, read when needed rather than before every task.
 | 2026-10-19 | S1-02 | Jack chose the intro and "what I do" copy (the team and standards draft); the `TODO(owner)` placeholders are gone, and the areas are titled Performance, APIs and integrations, Engineering standards and AI-assisted development |
 
 ## Waiting on Jack
-- S1-06: Promotr's test count in the CV now matches the site (about 29,700); look over the rebuilt `public/cv.pdf` once more and confirm it is the CV to make public.
+- Nothing for S1. S2-03 onwards (server, `.env`, `public_html`, DNS and redirects) needs Jack's go-ahead before it starts.
