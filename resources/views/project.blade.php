@@ -34,6 +34,12 @@
         </dl>
     </header>
     {{-- Detail copy is optional per section, so a project without it shows only the facts above. --}}
+    @isset($project->detail['overview'])
+        <section class="prose" aria-labelledby="overview">
+            <h2 id="overview">what it is</h2>
+            <p>{{ $project->detail['overview'] }}</p>
+        </section>
+    @endisset
     @isset($project->detail['problem'])
         <section class="prose" aria-labelledby="problem">
             <h2 id="problem">the problem</h2>

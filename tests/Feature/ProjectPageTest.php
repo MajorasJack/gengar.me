@@ -51,6 +51,14 @@ it('shows the visibility label in place of a link for a private project', functi
     expect(Str::between($response->getContent(), '<dl class="facts">', '</dl>'))->not->toContain('<a ');
 });
 
+it('shows the overview first, before the problem', function (): void {
+    config(['portfolio.projects.0.detail' => ['overview' => fake()->sentence(), 'problem' => fake()->sentence()]]);
+
+    $this->get('/projects/promotr')
+        ->assertOk()
+        ->assertSeeInOrder(['<h2 id="overview">what it is</h2>', e(config('portfolio.projects.0.detail.overview')), '<h2 id="problem">'], escape: false);
+});
+
 it('shows the problem from the project detail', function (): void {
     config(['portfolio.projects.0.detail' => ['problem' => fake()->sentence()]]);
 
@@ -80,6 +88,7 @@ it('shows no detail sections for a project without detail copy', function (): vo
 
     $this->get('/projects/promotr')
         ->assertOk()
+        ->assertDontSee('id="overview"', escape: false)
         ->assertDontSee('id="problem"', escape: false)
         ->assertDontSee('id="built"', escape: false)
         ->assertDontSee('id="notes"', escape: false);

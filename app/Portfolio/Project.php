@@ -12,7 +12,7 @@ final readonly class Project
 
     /**
      * @param  list<string>  $stack
-     * @param  array{problem?: string, built?: string, notes?: list<string>}|null  $detail
+     * @param  array{overview?: string, problem?: string, built?: string, notes?: list<string>}|null  $detail
      */
     public function __construct(
         public string $slug,
