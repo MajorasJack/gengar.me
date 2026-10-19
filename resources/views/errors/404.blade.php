@@ -2,6 +2,7 @@
 
 @section('title', sprintf('Page not found, %s', config('portfolio.profile.name')))
 @section('description', 'There is no page at this address on gengar.me. The homepage lists every project.')
+@section('unaddressed', true)
 
 @section('content')
     <header>
