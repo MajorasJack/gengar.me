@@ -1,6 +1,6 @@
 # gengar.me Portfolio - Plan
 
-Last Updated: 2026-10-18
+Last Updated: 2026-10-19
 
 This file covers how and in what order. Requirements are in `portfolio-site-spec.md`; tasks in `portfolio-site-tasks.md`. Acceptance criteria are not repeated here.
 

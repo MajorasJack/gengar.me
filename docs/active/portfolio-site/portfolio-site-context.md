@@ -1,6 +1,6 @@
 # gengar.me Portfolio - Context
 
-Last Updated: 2026-10-18
+Last Updated: 2026-10-19
 
 Reference material, read when needed rather than before every task.
 
