@@ -103,8 +103,8 @@ Server changes are outward-facing. Confirm with Jack before replacing `public_ht
 - [x] **S3-05** (#40) (Could) Add Promotr and DrinkSafe screenshots from their `brag-output/brag.jpg`, converted to WebP with `width` and `height` set and `loading="lazy"` · Req: CONT-7, NFR-1 · Files: `public/images/projects/` · `routine` · Done when images render without layout shift and the page stays inside the size budget.
 
 **S3 review checkpoint**
-- [ ] `code-auditor` review; Critical and High findings fixed
-- [ ] Demo: click Promotr in the table and read `/projects/promotr`; `/projects/nope` shows the styled 404
+- [x] `code-auditor` review; Critical and High findings fixed (none at Critical or High; the Medium 404 path echo and four Lows fixed in #41)
+- [x] Demo: click Promotr in the table and read `/projects/promotr`; `/projects/nope` shows the styled 404 (checked live 2026-10-19 on release `9ad42c8`)
 - [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
 
 ---
