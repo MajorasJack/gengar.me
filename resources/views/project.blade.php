@@ -33,6 +33,11 @@
             @endisset
         </dl>
     </header>
+    @isset($project->screenshot)
+        <figure class="screenshot">
+            <img src="{{ $project->screenshot['src'] }}" alt="{{ $project->screenshot['alt'] }}" width="{{ $project->screenshot['width'] }}" height="{{ $project->screenshot['height'] }}" loading="lazy" decoding="async">
+        </figure>
+    @endisset
     {{-- Detail copy is optional per section, so a project without it shows only the facts above. --}}
     @isset($project->detail['overview'])
         <section class="prose" aria-labelledby="overview">

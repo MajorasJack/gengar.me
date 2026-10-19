@@ -22,3 +22,12 @@ it('gives every featured project an overview, a problem, what was built and thre
 test('detail copy uses no em dash', function (array $entry): void {
     expect(json_encode($entry['detail'], JSON_UNESCAPED_UNICODE))->not->toContain('—');
 })->with(array_map(fn (array $entry): array => [$entry], array_column($portfolio['projects'], null, 'slug')));
+
+it('ships each screenshot as a WebP file with the width and height its entry states', function (array $screenshot): void {
+    expect(getimagesize(sprintf('%s/public%s', dirname(__DIR__, 3), $screenshot['src'])))
+        ->toMatchArray([0 => $screenshot['width'], 1 => $screenshot['height'], 'mime' => 'image/webp']);
+})->with(array_map(fn (array $entry): array => [$entry['screenshot']], array_filter(array_column($portfolio['projects'], null, 'slug'), fn (array $entry): bool => isset($entry['screenshot']))));
+
+it('gives each screenshot alt text', function (array $screenshot): void {
+    expect(trim($screenshot['alt']))->not->toBeEmpty();
+})->with(array_map(fn (array $entry): array => [$entry['screenshot']], array_filter(array_column($portfolio['projects'], null, 'slug'), fn (array $entry): bool => isset($entry['screenshot']))));

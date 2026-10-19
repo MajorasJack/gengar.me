@@ -14,6 +14,7 @@ final readonly class Project
      * @param  list<string>  $stack
      * @param  array{overview?: string, problem?: string, built?: string, notes?: list<string>}|null  $detail
      * @param  list<string>  $previousSlugs  slugs the project was known by before a rename, which redirect to its page
+     * @param  array{src: string, alt: string, width: int, height: int}|null  $screenshot  a root-relative image path with its alt text and pixel size
      */
     public function __construct(
         public string $slug,
@@ -28,6 +29,7 @@ final readonly class Project
         public ?array $detail = null,
         public ?string $source = null,
         public array $previousSlugs = [],
+        public ?array $screenshot = null,
     ) {}
 
     /**
@@ -68,6 +70,7 @@ final readonly class Project
             detail: $entry['detail'] ?? null,
             source: $entry['source'] ?? null,
             previousSlugs: $entry['previous_slugs'] ?? [],
+            screenshot: $entry['screenshot'] ?? null,
         );
     }
 }
