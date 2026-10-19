@@ -15,8 +15,8 @@ The server keeps three releases (the live one and the two newest of the rest), s
 `remote-deploy.sh` checks the parts of this it depends on and stops if they are wrong, but it does not create any of them. They are set up once, by root, before the first deploy.
 
 ```
-/home/gengar.me/                  o+x, so `nobody` can reach the site
-├── app/                          o+x
+/home/gengar.me/                  mode 711, so `nobody` can reach the site
+├── app/                          owner genga7347, group nogroup, mode 2750 (setgid)
 │   ├── releases/                 owner genga7347, group nogroup, mode 2750 (setgid)
 │   │   └── <timestamp>-<hash>/   one folder per release
 │   ├── current -> releases/<timestamp>-<hash>
@@ -29,6 +29,16 @@ The server keeps three releases (the live one and the two newest of the rest), s
 LiteSpeed serves static files as `nobody`, which reads them through the `nogroup` group. The setgid bit on `app/releases` is what gives every unpacked file that group; without it the deploy would succeed and every image, stylesheet and font would return a HTTP `403` status, so the script fails if a release's `public` folder is not in `nogroup`.
 
 PHP runs as `genga7347`, so it is the only user that needs to read `.env`. The script refuses to deploy if `.env` is not mode 600, and sets the cached config (`bootstrap/cache/config.php`, which holds `APP_KEY`) to mode 600 as well.
+
+## First deploy
+
+These only matter when the site is set up from scratch.
+
+- The vhost (`/usr/local/lsws/conf/vhosts/gengar.me/vhost.conf`) must run PHP from `/usr/local/lsws/lsphp84/bin/lsphp`, the same PHP the deploy uses for `artisan`. CyberPanel created it with PHP 8.5.
+- After `public_html` first becomes a link to `app/current/public`, OpenLiteSpeed needs a graceful restart (`/usr/local/lsws/bin/lswsctrl restart`) to read the release's `public/.htaccess`. Until then, every path other than `/` returns LiteSpeed's own `404` page. The restart reloads every site on the server, but lets requests in progress finish. Later deploys don't need it.
+- CyberPanel's placeholder page is kept in `/home/gengar.me/public_html.placeholder-20261019`.
+
+Every response carries `Cache-Control: no-transform`. Without it, Cloudflare's bot detection (a zone-wide setting) injects a script into each HTML page.
 
 ## Rollback
 
