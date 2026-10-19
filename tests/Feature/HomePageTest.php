@@ -103,7 +103,20 @@ it('shows a private project its visibility label without a link', function (): v
 
     $table = Str::between($this->get('/')->assertOk()->getContent(), '<table', '</table>');
 
-    expect($table)->toContain('<td class="host private" role="cell" data-label="host">private beta</td>')->not->toContain('<a ');
+    expect($table)->toContain('<td class="host private" role="cell" data-label="host">private beta</td>')->not->toContain('data-label="host"><a ');
+});
+
+it('links each project name to its detail page', function (): void {
+    $slugs = [fake()->unique()->slug(2), fake()->unique()->slug(2)];
+    config(['portfolio.projects' => [
+        ['slug' => $slugs[0], 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => sprintf('https://%s', fake()->domainName()), 'visibility' => null, 'status' => 'live'],
+        ['slug' => $slugs[1], 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => null, 'visibility' => 'private beta', 'status' => 'private'],
+    ]]);
+
+    $this->get('/')->assertOk()->assertSeeInOrder([
+        sprintf('<a href="/projects/%s">%s</a>', $slugs[0], e(config('portfolio.projects.0.name'))),
+        sprintf('<a href="/projects/%s">%s</a>', $slugs[1], e(config('portfolio.projects.1.name'))),
+    ], escape: false);
 });
 
 it('marks a private project with the off status dot', function (): void {

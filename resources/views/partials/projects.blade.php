@@ -8,7 +8,7 @@
         <tbody role="rowgroup">
             @foreach ($projects as $project)
                 <tr role="row">
-                    <td class="name" role="cell"><span @class(['dot', 'off' => $project->status === ProjectStatus::Private]) aria-hidden="true"></span>{{ $project->name }}</td>
+                    <td class="name" role="cell"><span @class(['dot', 'off' => $project->status === ProjectStatus::Private]) aria-hidden="true"></span><a href="{{ route('projects.show', $project->slug, false) }}">{{ $project->name }}</a></td>
                     @if ($project->url === null)
                         <td class="host private" role="cell" data-label="host">{{ $project->visibility }}</td>
                     @else
