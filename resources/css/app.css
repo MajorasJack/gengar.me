@@ -272,11 +272,6 @@ td.tests {
     white-space: nowrap;
 }
 
-td.tests .cases {
-    color: var(--colour-muted);
-    font-size: var(--text-2xs);
-}
-
 .dot {
     display: inline-block;
     width: 7px;

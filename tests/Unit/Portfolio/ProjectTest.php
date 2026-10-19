@@ -29,20 +29,11 @@ it('builds a project from a valid entry', function () use ($validEntry): void {
         summary: $entry['summary'],
         stack: $entry['stack'],
         tests: $entry['tests'],
-        testCases: null,
         testsCheckedAt: $entry['tests_checked_at'],
         url: $entry['url'],
         visibility: null,
         status: ProjectStatus::Live,
     ));
-});
-
-it('builds a project with its test case count', function () use ($validEntry): void {
-    $testCases = fake()->numberBetween(9001, 40000);
-
-    $project = Project::fromArray([...$validEntry(), 'test_cases' => $testCases]);
-
-    expect($project->testCases)->toBe($testCases);
 });
 
 it('builds a private project with a visibility label and no url', function () use ($validEntry): void {

@@ -88,24 +88,6 @@ it('shows each project summary, stack and approximate test count', function (): 
     ], escape: false);
 });
 
-it('shows the test case count beside the test count when it is set', function (): void {
-    $tests = fake()->numberBetween(1000, 5000);
-    $testCases = fake()->numberBetween(5001, 40000);
-    config(['portfolio.projects' => [
-        ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => $tests, 'test_cases' => $testCases, 'tests_checked_at' => '2026-10-18', 'url' => sprintf('https://%s', fake()->domainName()), 'visibility' => null, 'status' => 'live'],
-    ]]);
-
-    $this->get('/')->assertOk()->assertSee(sprintf('~%s <span class="cases">(%s cases)</span></span></td>', number_format($tests), number_format($testCases)), escape: false);
-});
-
-it('omits the test case count when it is not set', function (): void {
-    config(['portfolio.projects' => [
-        ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1000, 5000), 'tests_checked_at' => '2026-10-18', 'url' => sprintf('https://%s', fake()->domainName()), 'visibility' => null, 'status' => 'live'],
-    ]]);
-
-    $this->get('/')->assertOk()->assertDontSeeText('cases');
-});
-
 it('links a public project by its host', function (): void {
     config(['portfolio.projects' => [
         ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => 'https://darkroom.gengar.me', 'visibility' => null, 'status' => 'live'],
