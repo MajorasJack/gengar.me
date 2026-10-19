@@ -138,3 +138,24 @@ it('shows no source row when the repository is private', function (): void {
 
     $this->get('/projects/promotr')->assertOk()->assertDontSee('<dt>source</dt>', escape: false);
 });
+
+it('redirects a slug from before a rename to the project page', function (): void {
+    $this->get('/projects/movies')->assertMovedPermanently()->assertRedirect('/projects/rewind');
+});
+
+it('redirects any slug listed in a project\'s previous slugs', function (): void {
+    $previousSlug = fake()->unique()->slug();
+    config(['portfolio.projects.0.previous_slugs' => [$previousSlug]]);
+
+    $this->get(sprintf('/projects/%s', $previousSlug))
+        ->assertMovedPermanently()
+        ->assertRedirect(sprintf('/projects/%s', config('portfolio.projects.0.slug')));
+});
+
+it('sets no cookies on the rename redirect', function (): void {
+    $this->get('/projects/movies')->assertHeaderMissing('Set-Cookie');
+});
+
+it('asks proxies not to transform the rename redirect', function (): void {
+    expect($this->get('/projects/movies')->headers->get('Cache-Control'))->toContain('no-transform');
+});

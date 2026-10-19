@@ -55,6 +55,16 @@ it('leaves the detail empty when the entry has none', function () use ($validEnt
     expect(Project::fromArray($validEntry())->detail)->toBeNull();
 });
 
+it('carries the slugs the project had before a rename', function () use ($validEntry): void {
+    $previousSlugs = [fake()->slug(2)];
+
+    expect(Project::fromArray([...$validEntry(), 'previous_slugs' => $previousSlugs])->previousSlugs)->toBe($previousSlugs);
+});
+
+it('has no previous slugs when the entry lists none', function () use ($validEntry): void {
+    expect(Project::fromArray($validEntry())->previousSlugs)->toBe([]);
+});
+
 it('names the missing key when an entry lacks a required key', function (string $key) use ($validEntry): void {
     $entry = $validEntry();
     unset($entry[$key]);

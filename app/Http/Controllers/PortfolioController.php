@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Portfolio\Project;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
@@ -27,15 +28,21 @@ class PortfolioController extends Controller
 
     /**
      * Show one featured project's detail page, found by slug in `portfolio.projects`.
-     * An unknown slug gets the 404 page (CONT-8).
+     * A slug the project had before a rename redirects permanently to its current
+     * page, and an unknown slug gets the 404 page (CONT-8).
      */
-    public function project(string $slug): View
+    public function project(string $slug): View|RedirectResponse
     {
+        $projects = array_map(Project::fromArray(...), config('portfolio.projects'));
+        $renamed = array_find($projects, fn (Project $project): bool => in_array($slug, $project->previousSlugs, true));
+
+        if ($renamed !== null) {
+            return new RedirectResponse(route('projects.show', $renamed->slug, false), Response::HTTP_MOVED_PERMANENTLY);
+        }
+
         return view('project', [
             'profile' => config('portfolio.profile'),
-            'project' => Project::fromArray(
-                array_find(config('portfolio.projects'), fn (array $project): bool => $project['slug'] === $slug) ?? abort(Response::HTTP_NOT_FOUND),
-            ),
+            'project' => array_find($projects, fn (Project $project): bool => $project->slug === $slug) ?? abort(Response::HTTP_NOT_FOUND),
         ]);
     }
 
