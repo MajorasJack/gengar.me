@@ -26,8 +26,22 @@ class PortfolioController extends Controller
     }
 
     /**
-     * Serve the sitemap: the homepage, plus each project's detail page once
-     * S3-01 registers the `projects.show` route, so it never lists a 404.
+     * Show one featured project's detail page, found by slug in `portfolio.projects`.
+     * An unknown slug gets the 404 page (CONT-8).
+     */
+    public function project(string $slug): View
+    {
+        return view('project', [
+            'profile' => config('portfolio.profile'),
+            'project' => Project::fromArray(
+                array_find(config('portfolio.projects'), fn (array $project): bool => $project['slug'] === $slug) ?? abort(Response::HTTP_NOT_FOUND),
+            ),
+        ]);
+    }
+
+    /**
+     * Serve the sitemap: the homepage, plus each project's detail page while
+     * the `projects.show` route exists, so it never lists a 404.
      * URLs use `portfolio.canonical_host` rather than APP_URL.
      */
     public function sitemap(): Response

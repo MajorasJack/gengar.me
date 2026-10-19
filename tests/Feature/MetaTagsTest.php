@@ -45,6 +45,20 @@ it('repeats the meta description as the Open Graph description', function (): vo
     $this->get('/')->assertOk()->assertSee(sprintf('<meta property="og:description" content="%s">', e(config('portfolio.profile.description'))), escape: false);
 });
 
+it('titles a project page with the project and owner names', function (): void {
+    $this->get('/projects/promotr')->assertOk()->assertSee('<title>Promotr, Jack Evans</title>', escape: false);
+});
+
+it('describes a project page with its summary', function (): void {
+    $this->get('/projects/promotr')
+        ->assertOk()
+        ->assertSee(sprintf('<meta name="description" content="%s">', e(config('portfolio.projects.0.summary'))), escape: false);
+});
+
+it('points a project page canonical URL at its own path', function (): void {
+    $this->get('/projects/promotr')->assertOk()->assertSee('<link rel="canonical" href="https://gengar.me/projects/promotr">', escape: false);
+});
+
 it('ships a 1200 by 630 PNG as the Open Graph image', function (): void {
     expect(getimagesize(public_path('og.png')))->toMatchArray([0 => 1200, 1 => 630, 'mime' => 'image/png']);
 });
