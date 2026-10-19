@@ -38,3 +38,7 @@ it('points robots.txt at the sitemap', function (): void {
     expect(File::get(public_path('robots.txt')))
         ->toContain(sprintf('Sitemap: https://%s/sitemap.xml', config('portfolio.canonical_host')));
 });
+
+it('leaves slugs from before a rename out of the sitemap', function (): void {
+    $this->get('/sitemap.xml')->assertDontSee('/projects/movies<', escape: false);
+});

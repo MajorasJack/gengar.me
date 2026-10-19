@@ -136,8 +136,9 @@ return [
             ],
         ],
         [
-            'slug' => 'movies',
-            'name' => 'Movies',
+            'slug' => 'rewind',
+            'name' => 'Rewind',
+            'previous_slugs' => ['movies'],
             'summary' => 'Catalogue for a physical film collection, filled in from a barcode scan.',
             'stack' => ['Laravel 13', 'Inertia 3', 'React 19', 'TMDB', 'OMDb'],
             'tests' => 2316,
@@ -146,7 +147,7 @@ return [
             'visibility' => null,
             'status' => 'live',
             'detail' => [
-                'overview' => 'Movies is a catalogue for a physical film collection: DVD, Blu-ray, 4K Ultra HD, VHS, LaserDisc and other disc and tape formats. Scanning a barcode on a phone adds an edition to the collection, and a wantlist tracks what is still to find. The catalogue of films and editions is shared, and signed-in members can add to it.',
+                'overview' => 'Rewind is a catalogue for a physical film collection: DVD, Blu-ray, 4K Ultra HD, VHS, LaserDisc and other disc and tape formats. Scanning a barcode on a phone adds an edition to the collection, and a wantlist tracks what is still to find. The catalogue of films and editions is shared, and signed-in members can add to it.',
                 'problem' => 'Film databases list films, not the editions on a shelf, and a barcode identifies an edition rather than a film.',
                 'built' => 'A modular Laravel 13 app on PostgreSQL with an Inertia and React 19 front end, built AI-first with Claude Code. Film details come from TMDB and OMDb.',
                 'notes' => [

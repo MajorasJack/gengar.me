@@ -13,6 +13,7 @@ final readonly class Project
     /**
      * @param  list<string>  $stack
      * @param  array{overview?: string, problem?: string, built?: string, notes?: list<string>}|null  $detail
+     * @param  list<string>  $previousSlugs  slugs the project was known by before a rename, which redirect to its page
      */
     public function __construct(
         public string $slug,
@@ -26,6 +27,7 @@ final readonly class Project
         public ProjectStatus $status,
         public ?array $detail = null,
         public ?string $source = null,
+        public array $previousSlugs = [],
     ) {}
 
     /**
@@ -65,6 +67,7 @@ final readonly class Project
                 ?? throw InvalidProjectException::unknownStatus(slug: $entry['slug'], status: $entry['status']),
             detail: $entry['detail'] ?? null,
             source: $entry['source'] ?? null,
+            previousSlugs: $entry['previous_slugs'] ?? [],
         );
     }
 }
