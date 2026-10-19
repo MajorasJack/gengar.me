@@ -8,3 +8,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PortfolioController::class, 'home']);
 Route::get('/up', HealthCheckController::class);
+Route::get('/sitemap.xml', [PortfolioController::class, 'sitemap']);
