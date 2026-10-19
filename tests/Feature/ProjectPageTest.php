@@ -160,7 +160,7 @@ it('asks proxies not to transform the rename redirect', function (): void {
     expect($this->get('/projects/movies')->headers->get('Cache-Control'))->toContain('no-transform');
 });
 
-it('shows the screenshot with its alt text, dimensions and lazy loading', function (): void {
+it('shows the screenshot with its alt text, dimensions and high fetch priority', function (): void {
     config(['portfolio.projects.0.screenshot' => [
         'src' => sprintf('/images/projects/%s.webp', fake()->slug(1)),
         'alt' => fake()->sentence(),
@@ -171,7 +171,7 @@ it('shows the screenshot with its alt text, dimensions and lazy loading', functi
     $this->get('/projects/promotr')
         ->assertOk()
         ->assertSee(sprintf(
-            '<img src="%s" alt="%s" width="%d" height="%d" loading="lazy" decoding="async">',
+            '<img src="%s" alt="%s" width="%d" height="%d" fetchpriority="high" decoding="async">',
             e(config('portfolio.projects.0.screenshot.src')),
             e(config('portfolio.projects.0.screenshot.alt')),
             config('portfolio.projects.0.screenshot.width'),
