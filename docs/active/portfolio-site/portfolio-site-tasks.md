@@ -82,8 +82,8 @@ Server changes are outward-facing. Confirm with Jack before replacing `public_ht
 - [x] **S2-06** (rollback tested live 2026-10-19) Document deploy and rollback in `deploy/README.md` · Req: OPS-3 · Files: `deploy/README.md` · `routine` · Done when a rollback following the README restores the previous release.
 
 **S2 review checkpoint**
-- [ ] `feature-dev:code-reviewer` review of both scripts; Critical and High findings fixed
-- [ ] Demo: visit `https://gengar.me`, run a deploy, roll back by one symlink
+- [x] `feature-dev:code-reviewer` review of both scripts; Critical and High findings fixed (no Critical or High; the five Medium and the Low findings fixed in #25 before the first real run)
+- [x] Demo: visit `https://gengar.me`, run a deploy, roll back by one symlink (2026-10-19: three deploys run, rollback to the previous release and forward again following `deploy/README.md`)
 - [ ] Jack reads the live homepage and adjusts copy before S3
 - [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
 
