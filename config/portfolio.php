@@ -55,12 +55,12 @@ return [
             'status' => 'live',
             'detail' => [
                 'problem' => 'Promoters run budgets, tours, artists and contracts across spreadsheets and separate tools. Budgets are the hard part, because costs and ticket sales keep moving until the night of the show.',
-                'built' => 'A multi-tenant platform for promoters, booking agents, venues and artists. It covers event and tour budgets, artist guarantees, contracts from templates, tasks, ticket sales and public pages for events, brands and artists. The Vue front end was built AI-first with Claude Code; I own the architecture, data model, tests and review.',
+                'built' => 'A multi-tenant platform for promoters, booking agents, venues and artists. It covers event and tour budgets, artist guarantees, contracts from templates, tasks, ticket sales and public pages for events, brands and artists. I built the Vue front end AI-first with Claude Code, and I own the architecture, data model, tests and code review.',
                 'notes' => [
-                    'Over 50 Laravel modules, each holding its own routes, migrations, policies, tests and Vue pages.',
-                    'Records belong to a promoter, venue, booking agency or artist through a polymorphic owner. A company is billing data and owns nothing.',
+                    'Over 50 Laravel modules. Each keeps its own tests, and most also hold their own routes, migrations, policies and Vue pages.',
+                    'Nearly every record belongs to one promoter, venue, booking agency or artist. A company holds only billing details and has no records of its own.',
                     'One ticketing platform\'s API does not return sales, so its daily report emails are parsed instead. Each event is matched by name, date and venue, and an email that fails to parse is kept for review.',
-                    'Events, brands and artists can use their own domain. The domain is checked with a DNS TXT record before an SSL certificate is set up.',
+                    'Events, brands and artists can use their own web address (domain). The domain is checked with a DNS TXT record before an SSL certificate is set up.',
                     'Notifications are broadcast in real time over Reverb.',
                 ],
             ],
@@ -77,7 +77,7 @@ return [
             'status' => 'private',
             'detail' => [
                 'problem' => 'Recipe apps ignore what is in the cupboards, and pantry apps fail because keeping them up to date is a chore.',
-                'built' => 'An invite-only web app for a household, installed on the phone\'s Home Screen. It imports recipes from web pages, captions and photos with Claude, and from videos with Gemini, matches the ingredients to the pantry, and builds the shopping list from what is running low. Tapping "I cooked this" updates the stock, so the pantry stays accurate as a side effect of cooking. The Vue front end was built AI-first with Claude Code.',
+                'built' => 'An invite-only web app for a household, installed on the phone\'s Home Screen. It imports recipes from web pages, captions and photos with Claude, and from videos with Gemini, matches the ingredients to the pantry, and builds the shopping list from what is running low. Tapping "I cooked this" updates the stock, so the pantry stays accurate as a side effect of cooking. I built the Vue front end AI-first with Claude Code and reviewed every change, and the matching, offline sync and stock ledger are hand-designed.',
                 'notes' => [
                     'Every AI import ends in a confirm-or-edit step. Claude answers against a JSON schema, so each result is validated before it becomes a draft.',
                     'Ingredient matching runs in PHP: exact alias, household alias, PostgreSQL trigram similarity, then Claude\'s suggestion. A correction is saved as a household alias, so the same ingredient never needs fixing twice.',
@@ -98,14 +98,14 @@ return [
             'visibility' => null,
             'status' => 'live',
             'detail' => [
-                'problem' => 'Darkroom is a self-hosted, invite-only alternative to the online image tools, for me and a few invited people. It runs on a two-CPU server shared with other sites, so heavy work has to be planned around that.',
-                'built' => 'A Laravel app with fifteen server tools, including background removal, conversion, compression, face blur, OCR and image to PDF, plus upscaling and object removal in the browser. Server-side image work runs in a Python FastAPI service with pyvips and rembg, which Laravel calls on localhost from a queued job. The Vue front end was built AI-first with Claude Code.',
+                'problem' => 'Online image tools upload your photos to someone else\'s server, and the popular ones charge a monthly fee or a per-image price for their full features. Darkroom does the same jobs on my own two-CPU server, which is shared with other sites, so heavy work has to be planned around that.',
+                'built' => 'An invite-only Laravel app, for me and a few invited people, with fifteen server tools, including background removal, conversion, compression, face blur, OCR and image to PDF, plus upscaling and object removal in the browser. The Vue front end was built AI-first with Claude Code; I designed the split between server and browser work, and the Python service.',
                 'notes' => [
-                    'Upscaling (Real-ESRGAN) and object removal (LaMa) run in the browser on WebGPU through onnxruntime-web, so those images never reach the server.',
-                    'Each device downloads a model once. It is kept in the Cache API under its SHA-256 and checked on every read.',
-                    'Cross-origin isolation headers are set only on the in-browser tool pages, so the rest of the site is unaffected.',
+                    'Light work and background removal run on the server, in a Python FastAPI service with pyvips and rembg that Laravel calls on localhost from a queued job.',
+                    'Upscaling (Real-ESRGAN) and object removal (LaMa) run in the browser through onnxruntime-web, on WebGPU where the device has it, so those images never reach the server.',
+                    'Each device downloads a model once and keeps it in the Cache API under its SHA-256, checked on every read. Cross-origin isolation headers are set only on those two tool pages.',
                     'Files are short-lived. An original is deleted when its result is first downloaded, and everything is pruned an hour after upload. EXIF and GPS data is always stripped.',
-                    'Only MIT, Apache, BSD or LGPL dependencies are allowed, so paid plans stay possible later.',
+                    'Only MIT, Apache or BSD dependencies are allowed, plus libvips under the LGPL, so paid plans stay possible later.',
                 ],
             ],
         ],
@@ -121,8 +121,8 @@ return [
             'status' => 'live',
             'source' => 'https://github.com/MajorasJack/drinksafe.app',
             'detail' => [
-                'problem' => 'DrinkSafe lets people report, anonymously, a venue where they were spiked, so others can make informed choices about where to go. It is informational, not a way to report a crime, and points people to the police.',
-                'built' => 'Anonymous reports with no accounts, venue search, a safety score for each venue and an incident heatmap on Leaflet. Venues come from OpenStreetMap. It started as a React version and was rebuilt as a modular Laravel 13 app with Inertia and Vue, built AI-first with Claude Code.',
+                'problem' => 'People who have been spiked at a venue may want to warn others without going on record. DrinkSafe lets them report it anonymously, so others can make informed choices about where to go. It is informational, not a way to report a crime, and points people to the police.',
+                'built' => 'Anonymous reports with no accounts, venue search, a safety score for each venue and an incident heatmap on Leaflet. Venues come from OpenStreetMap. It started as a React version and was rebuilt as a modular Laravel 13 app with Inertia and Vue. I used Claude Code AI-first for the front end and designed the scoring and privacy rules myself.',
                 'notes' => [
                     'Reports are anonymous. Each one is checked for email addresses and phone numbers before it is saved, and submissions go through Cloudflare Turnstile.',
                     'A venue\'s safety score weights each report by age, halving every 90 days. Reports over a year old are left out, and a score needs at least three reports.',
@@ -144,7 +144,7 @@ return [
             'status' => 'live',
             'detail' => [
                 'problem' => 'Mainstream film databases cover horror and cult releases on disc poorly, and no usable public API holds disc-level details. A barcode identifies an edition, not a film, and the catalogue has to model that.',
-                'built' => 'A catalogue in three layers: the film, the physical release (label, region, cut and barcode) and your own copy. A barcode scan in the phone browser looks the release up, and anything new goes in as a moderated contribution. The React front end was built AI-first with Claude Code.',
+                'built' => 'A catalogue in three layers: the film, the physical release (label, region, cut and barcode) and my copy. A barcode scan in the phone browser looks the release up, and anything new goes in as a moderated contribution. I built the React front end AI-first with Claude Code; the three-layer data model and the provider chains are my design.',
                 'notes' => [
                     'Film and barcode lookups run through ordered provider chains: TMDB, OMDb and Wikidata for films, and two retail barcode databases. A provider without a key drops out of the chain instead of failing every scan.',
                     'A scan that finds no barcode offers candidate releases matched by film title. Nothing is selected automatically, because a wrong match is invisible afterwards.',
