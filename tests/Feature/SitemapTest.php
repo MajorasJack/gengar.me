@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Route;
 
 it('serves the sitemap as XML', function (): void {
     $this->get('/sitemap.xml')
@@ -33,7 +32,7 @@ it('lists each project detail page', function (): void {
         sprintf('<loc>https://%s/projects/%s</loc>', config('portfolio.canonical_host'), $project['slug']),
         escape: false,
     ));
-})->skip(fn (): bool => ! Route::has('projects.show'), 'S3-01 adds the projects.show detail route');
+});
 
 it('points robots.txt at the sitemap', function (): void {
     expect(File::get(public_path('robots.txt')))
