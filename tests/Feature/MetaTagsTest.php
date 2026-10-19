@@ -95,5 +95,23 @@ it('titles the not found page', function (): void {
 });
 
 it('describes the not found page', function (): void {
-    $this->get(sprintf('/%s', fake()->slug()))->assertNotFound()->assertSee('<meta name="description" content="', escape: false);
+    $this->get(sprintf('/%s', fake()->slug()))
+        ->assertNotFound()
+        ->assertSee('<meta name="description" content="There is no page at this address on gengar.me. The homepage lists every project.">', escape: false);
+});
+
+it('leaves the requested path out of the not found page', function (): void {
+    $slug = fake()->slug();
+
+    $this->get(sprintf('/%s', $slug))->assertNotFound()->assertDontSee($slug, escape: false);
+});
+
+it('leaves an encoded markup path out of the not found page', function (): void {
+    $slug = fake()->slug();
+
+    $this->get(sprintf('/%s%%22%%3E%%3Cx', $slug))->assertNotFound()->assertDontSee($slug, escape: false);
+});
+
+it('gives the not found page no JSON-LD', function (): void {
+    $this->get(sprintf('/%s', fake()->slug()))->assertNotFound()->assertDontSee('application/ld+json', escape: false);
 });

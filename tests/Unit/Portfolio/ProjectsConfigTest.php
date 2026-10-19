@@ -31,3 +31,9 @@ it('ships each screenshot as a WebP file with the width and height its entry sta
 it('gives each screenshot alt text', function (array $screenshot): void {
     expect(trim($screenshot['alt']))->not->toBeEmpty();
 })->with(array_map(fn (array $entry): array => [$entry['screenshot']], array_filter(array_column($portfolio['projects'], null, 'slug'), fn (array $entry): bool => isset($entry['screenshot']))));
+
+test('no slug, current or previous, belongs to two projects', function () use ($portfolio): void {
+    $slugs = array_merge(...array_map(fn (array $entry): array => [$entry['slug'], ...$entry['previous_slugs'] ?? []], $portfolio['projects']));
+
+    expect($slugs)->toBe(array_values(array_unique($slugs)));
+});

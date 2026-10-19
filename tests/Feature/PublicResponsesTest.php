@@ -14,7 +14,7 @@ it('sets no cookies', function (string $uri): void {
 
 it('loads no third-party resources', function (string $uri): void {
     expect($this->get($uri)->getContent())
-        ->not->toMatch(sprintf('#<(?:(?:link|script|img|iframe|source|video|audio|embed|object)\b[^>]*\b(?:href|src|data|poster)|form\b[^>]*\baction)\s*=\s*["\']?\s*(?:https?:(?!//%1$s/)|//(?!%1$s/))#i', preg_quote(config('portfolio.canonical_host'), '#')));
+        ->not->toMatch(sprintf('#<(?:(?:link|script|img|iframe|source|video|audio|embed|object)\b[^>]*\b(?:(?:href|src|data|poster)\s*=\s*["\']?|(?:image)?srcset\s*=\s*["\']?(?:[^"\'>]*,)?)|form\b[^>]*\baction\s*=\s*["\']?)\s*(?:https?:(?!//%1$s/)|//(?!%1$s/))#i', preg_quote(config('portfolio.canonical_host'), '#')));
 })->with('public responses');
 
 it('ships no JavaScript', function (string $uri): void {

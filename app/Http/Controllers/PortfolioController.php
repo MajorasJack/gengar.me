@@ -8,7 +8,6 @@ use App\Portfolio\Project;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Route;
 
 class PortfolioController extends Controller
 {
@@ -47,8 +46,7 @@ class PortfolioController extends Controller
     }
 
     /**
-     * Serve the sitemap: the homepage, plus each project's detail page while
-     * the `projects.show` route exists, so it never lists a 404.
+     * Serve the sitemap: the homepage and each project's detail page.
      * URLs use `portfolio.canonical_host` rather than APP_URL.
      */
     public function sitemap(): Response
@@ -57,9 +55,7 @@ class PortfolioController extends Controller
             'host' => config('portfolio.canonical_host'),
             'paths' => [
                 '/',
-                ...Route::has('projects.show')
-                    ? array_map(fn (array $project): string => sprintf('/projects/%s', $project['slug']), config('portfolio.projects'))
-                    : [],
+                ...array_map(fn (array $project): string => sprintf('/projects/%s', $project['slug']), config('portfolio.projects')),
             ],
         ])->header('Content-Type', 'application/xml; charset=UTF-8');
     }
