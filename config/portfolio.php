@@ -38,8 +38,10 @@ return [
 
     // Keys per entry: slug, name, summary, stack (list), tests (int, approximate),
     // tests_checked_at (Y-m-d), url (nullable), visibility (label when url is null),
-    // status (live or private), detail (problem, built, notes; S3). tests is the number of
+    // status (live or private), detail (problem, built, notes; S3), source (public repo url,
+    // optional). tests is the number of
     // test functions in the PHP suite, from `pest --list-tests` with dataset rows collapsed.
+    // TODO(owner): every `detail` below is a draft from the project's own docs, waiting on Jack to approve or edit.
     'projects' => [
         [
             'slug' => 'promotr',
@@ -51,6 +53,17 @@ return [
             'url' => 'https://promotr.co',
             'visibility' => null,
             'status' => 'live',
+            'detail' => [
+                'problem' => 'Promoters run budgets, tours, artists and contracts across spreadsheets and separate tools. Budgets are the hard part, because costs and ticket sales keep moving until the night of the show.',
+                'built' => 'A multi-tenant platform for promoters, booking agents, venues and artists. It covers event and tour budgets, artist guarantees, contracts from templates, tasks, ticket sales and public pages for events, brands and artists. The Vue front end was built AI-first with Claude Code; I own the architecture, data model, tests and review.',
+                'notes' => [
+                    'Over 50 Laravel modules, each holding its own routes, migrations, policies, tests and Vue pages.',
+                    'Records belong to a promoter, venue, booking agency or artist through a polymorphic owner. A company is billing data and owns nothing.',
+                    'One ticketing platform\'s API does not return sales, so its daily report emails are parsed instead. Each event is matched by name, date and venue, and an email that fails to parse is kept for review.',
+                    'Events, brands and artists can use their own domain. The domain is checked with a DNS TXT record before an SSL certificate is set up.',
+                    'Notifications are broadcast in real time over Reverb.',
+                ],
+            ],
         ],
         [
             'slug' => 'larder',
@@ -62,6 +75,17 @@ return [
             'url' => null,
             'visibility' => 'private beta',
             'status' => 'private',
+            'detail' => [
+                'problem' => 'Recipe apps ignore what is in the cupboards, and pantry apps fail because keeping them up to date is a chore.',
+                'built' => 'An invite-only web app for a household, installed on the phone\'s Home Screen. It imports recipes from web pages, captions and photos with Claude, and from videos with Gemini, matches the ingredients to the pantry, and builds the shopping list from what is running low. Tapping "I cooked this" updates the stock, so the pantry stays accurate as a side effect of cooking. The Vue front end was built AI-first with Claude Code.',
+                'notes' => [
+                    'Every AI import ends in a confirm-or-edit step. Claude answers against a JSON schema, so each result is validated before it becomes a draft.',
+                    'Ingredient matching runs in PHP: exact alias, household alias, PostgreSQL trigram similarity, then Claude\'s suggestion. A correction is saved as a household alias, so the same ingredient never needs fixing twice.',
+                    'The shopping list and quick stock changes work offline. Changes queue in IndexedDB and replay in order, with IDs made on the device so a replay is safe to repeat.',
+                    'Stock changes are an append-only ledger, and undo writes a reversing entry. Use-by and best-before dates are stored and shown differently.',
+                    'AI spend is recorded in pence from every response, with a daily import limit and a monthly cap for each person.',
+                ],
+            ],
         ],
         [
             'slug' => 'darkroom',
@@ -73,6 +97,17 @@ return [
             'url' => 'https://darkroom.gengar.me',
             'visibility' => null,
             'status' => 'live',
+            'detail' => [
+                'problem' => 'Darkroom is a self-hosted, invite-only alternative to the online image tools, for me and a few invited people. It runs on a two-CPU server shared with other sites, so heavy work has to be planned around that.',
+                'built' => 'A Laravel app with fifteen server tools, including background removal, conversion, compression, face blur, OCR and image to PDF, plus upscaling and object removal in the browser. Server-side image work runs in a Python FastAPI service with pyvips and rembg, which Laravel calls on localhost from a queued job. The Vue front end was built AI-first with Claude Code.',
+                'notes' => [
+                    'Upscaling (Real-ESRGAN) and object removal (LaMa) run in the browser on WebGPU through onnxruntime-web, so those images never reach the server.',
+                    'Each device downloads a model once. It is kept in the Cache API under its SHA-256 and checked on every read.',
+                    'Cross-origin isolation headers are set only on the in-browser tool pages, so the rest of the site is unaffected.',
+                    'Files are short-lived. An original is deleted when its result is first downloaded, and everything is pruned an hour after upload. EXIF and GPS data is always stripped.',
+                    'Only MIT, Apache, BSD or LGPL dependencies are allowed, so paid plans stay possible later.',
+                ],
+            ],
         ],
         [
             'slug' => 'drinksafe',
@@ -84,6 +119,18 @@ return [
             'url' => 'https://drinksafe.app',
             'visibility' => null,
             'status' => 'live',
+            'source' => 'https://github.com/MajorasJack/drinksafe.app',
+            'detail' => [
+                'problem' => 'DrinkSafe lets people report, anonymously, a venue where they were spiked, so others can make informed choices about where to go. It is informational, not a way to report a crime, and points people to the police.',
+                'built' => 'Anonymous reports with no accounts, venue search, a safety score for each venue and an incident heatmap on Leaflet. Venues come from OpenStreetMap. It started as a React version and was rebuilt as a modular Laravel 13 app with Inertia and Vue, built AI-first with Claude Code.',
+                'notes' => [
+                    'Reports are anonymous. Each one is checked for email addresses and phone numbers before it is saved, and submissions go through Cloudflare Turnstile.',
+                    'A venue\'s safety score weights each report by age, halving every 90 days. Reports over a year old are left out, and a score needs at least three reports.',
+                    'The heatmap groups reports into cells of about 100 metres and hides any cell with fewer than three reports, to protect privacy.',
+                    'Records use UUID keys rather than counting IDs, for anonymity.',
+                    'Pest 4 browser tests run alongside the feature and unit tests.',
+                ],
+            ],
         ],
         [
             'slug' => 'movies',
@@ -95,6 +142,17 @@ return [
             'url' => 'https://movies.gengar.me',
             'visibility' => null,
             'status' => 'live',
+            'detail' => [
+                'problem' => 'Mainstream film databases cover horror and cult releases on disc poorly, and no usable public API holds disc-level details. A barcode identifies an edition, not a film, and the catalogue has to model that.',
+                'built' => 'A catalogue in three layers: the film, the physical release (label, region, cut and barcode) and your own copy. A barcode scan in the phone browser looks the release up, and anything new goes in as a moderated contribution. The React front end was built AI-first with Claude Code.',
+                'notes' => [
+                    'Film and barcode lookups run through ordered provider chains: TMDB, OMDb and Wikidata for films, and two retail barcode databases. A provider without a key drops out of the chain instead of failing every scan.',
+                    'A scan that finds no barcode offers candidate releases matched by film title. Nothing is selected automatically, because a wrong match is invisible afterwards.',
+                    'A box set is one release with several films attached, which needed no new tables.',
+                    'Some shop feeds refuse the production server. Their catalogues are captured elsewhere and imported from the snapshot through the same code as a live import.',
+                    'Duplicate editions are found and merged with tooling, and a merge can be reverted.',
+                ],
+            ],
         ],
     ],
 

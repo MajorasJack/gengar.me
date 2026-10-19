@@ -115,3 +115,17 @@ it('renders the styled not found page for an unknown slug', function (): void {
         ->assertSee('<h1>Nothing lives at this address</h1>', escape: false)
         ->assertSee('<a href="/">', escape: false);
 });
+
+it('links to the source code when the project has a public repository', function (): void {
+    config(['portfolio.projects.0.source' => sprintf('https://github.com/%s/%s', fake()->userName(), fake()->slug(2))]);
+
+    $this->get('/projects/promotr')
+        ->assertOk()
+        ->assertSeeInOrder(['<dt>source</dt>', sprintf('<a href="%s">', e(config('portfolio.projects.0.source')))], escape: false);
+});
+
+it('shows no source row when the repository is private', function (): void {
+    config(['portfolio.projects.0.source' => null]);
+
+    $this->get('/projects/promotr')->assertOk()->assertDontSee('<dt>source</dt>', escape: false);
+});
