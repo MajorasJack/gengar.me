@@ -1,6 +1,6 @@
 # gengar.me Portfolio - Tasks
 
-Last Updated: 2026-10-18
+Last Updated: 2026-10-19
 
 ## How to use this file
 - Before a slice: read its "Before starting" block, load the listed skills, read the listed ADRs and spec sections.
@@ -84,8 +84,8 @@ Server changes are outward-facing. Confirm with Jack before replacing `public_ht
 **S2 review checkpoint**
 - [x] `feature-dev:code-reviewer` review of both scripts; Critical and High findings fixed (no Critical or High; the five Medium and the Low findings fixed in #25 before the first real run)
 - [x] Demo: visit `https://gengar.me`, run a deploy, roll back by one symlink (2026-10-19: three deploys run, rollback to the previous release and forward again following `deploy/README.md`)
-- [ ] Jack reads the live homepage and adjusts copy before S3
-- [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
+- [x] Jack reads the live homepage and adjusts copy before S3 (read 2026-10-19; copy changes went in through #21 and #37)
+- [x] Sign-off: Reviewer Jack · Date 2026-10-19 · Status: Approved
 
 ---
 
@@ -105,7 +105,7 @@ Server changes are outward-facing. Confirm with Jack before replacing `public_ht
 **S3 review checkpoint**
 - [x] `code-auditor` review; Critical and High findings fixed (none at Critical or High; the Medium 404 path echo and four Lows fixed in #41)
 - [x] Demo: click Promotr in the table and read `/projects/promotr`; `/projects/nope` shows the styled 404 (checked live 2026-10-19 on release `9ad42c8`)
-- [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
+- [x] Sign-off: Reviewer Jack · Date 2026-10-19 · Status: Approved
 
 ---
 
@@ -124,5 +124,5 @@ Server changes are outward-facing. Confirm with Jack before replacing `public_ht
 
 **S4 review checkpoint**
 - [x] `feature-dev:code-reviewer` review; Critical and High findings fixed (review of #43 and #44: no Critical, High or Medium; a token-coverage and no-raw-colour test added and the S3-05 wording fixed in the S4 review PR. The earlier S4 favicon, meta and sitemap work was covered by the S3 audit)
-- [ ] Demo: paste the URL into Slack and see the preview card; Lighthouse report meets targets
-- [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
+- [x] Demo: paste the URL into Slack and see the preview card; Lighthouse report meets targets (Slack card checked by Jack 2026-10-19; Lighthouse mobile 100 in every category on `/` and `/projects/promotr`, and on `/` in the light theme)
+- [x] Sign-off: Reviewer Jack · Date 2026-10-19 · Status: Approved

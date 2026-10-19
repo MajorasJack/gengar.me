@@ -1,6 +1,6 @@
 # gengar.me Portfolio - Spec
 
-Last Updated: 2026-10-18
+Last Updated: 2026-10-19
 
 This file covers what we are building and why. How is in `portfolio-site-plan.md`; the work is in `portfolio-site-tasks.md`.
 
