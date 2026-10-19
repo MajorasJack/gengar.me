@@ -27,6 +27,9 @@ jobs:
             exit 1
           fi
 
+      - name: Remote deploy script
+        run: deploy/tests/remote-deploy-test.sh
+
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
