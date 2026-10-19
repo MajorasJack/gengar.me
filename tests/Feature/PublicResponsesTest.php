@@ -21,3 +21,7 @@ it('ships no JavaScript', function (string $uri): void {
     expect($this->get($uri)->getContent())
         ->not->toMatch('#<script\b|javascript:|<[a-z][^>]*\son[a-z]+\s*=|\brel\s*=\s*["\']?modulepreload#i');
 })->with('public responses');
+
+it('asks proxies not to transform the response', function (string $uri): void {
+    expect($this->get($uri)->headers->get('Cache-Control'))->toContain('no-transform');
+})->with('public responses');
