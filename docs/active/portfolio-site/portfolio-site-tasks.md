@@ -116,7 +116,7 @@ Server changes are outward-facing. Confirm with Jack before replacing `public_ht
 - Skills: `frontend-design`, `web-design-guidelines`
 - Read: spec sections 7.3 and 7.5
 
-- [ ] **S4-01** Add the light palette under `prefers-color-scheme: light`, keeping dark as the default when there is no preference · Req: UI-2, NFR-3 · Files: `resources/css/app.css` · `routine` · Done when both palettes pass AA contrast and the accent reads on both.
+- [x] **S4-01** (#43) Add the light palette under `prefers-color-scheme: light`, keeping dark as the default when there is no preference · Req: UI-2, NFR-3 · Files: `resources/css/app.css` · `routine` · Done when both palettes pass AA contrast and the accent reads on both.
 - [x] **S4-02** (#32) Add meta description, canonical URL and Open Graph/Twitter tags per page, plus a 1200x630 static Open Graph image in the direction C style · Req: NFR-7 · Files: `resources/views/layouts/site.blade.php`, `public/og.png`, `tests/Feature/MetaTagsTest.php` · `routine` · Done when tests assert the tags on `/` and a detail page.
 - [x] **S4-03** (#33) Serve `sitemap.xml` (home plus detail pages, from config) and `robots.txt` · Req: NFR-7 · Files: `routes/web.php`, `resources/views/sitemap.blade.php`, `public/robots.txt`, `tests/Feature/SitemapTest.php` · `routine` · Done when the test asserts every featured project URL appears in the sitemap.
 - [ ] **S4-04** Run Lighthouse (mobile) on the live homepage and one detail page; fix anything below target · Req: NFR-2 · Files: as needed · `routine` · Done when scores are at least 95 performance and 100 accessibility, recorded in context.

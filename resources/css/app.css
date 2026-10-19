@@ -17,7 +17,7 @@
 }
 
 :root {
-    color-scheme: dark;
+    color-scheme: dark light;
 
     --colour-bg: #15121b;
     --colour-raise: #1d1925;
@@ -52,6 +52,20 @@
     --radius: 6px;
     --measure: 60ch;
     --page-width: 900px;
+}
+
+/* Dark stays the default with no preference (UI-1); a light preference keeps the accent hue (UI-2). */
+@media (prefers-color-scheme: light) {
+    :root {
+        --colour-bg: #f8f6fb;
+        --colour-raise: #eeeaf5;
+        --colour-ink: #1c1825;
+        --colour-ink-soft: #3b3448;
+        --colour-muted: #5f576f;
+        --colour-line: #dcd5e6;
+        --colour-accent: #6941c6;
+        --colour-ok: #1e7a45;
+    }
 }
 
 *,

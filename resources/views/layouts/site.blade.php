@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="dark">
+    <meta name="color-scheme" content="dark light">
     <title>@yield('title', config('app.name'))</title>
     {{-- Pages that set a description get the full set of search and sharing tags (NFR-7). --}}
     @hasSection('description')
