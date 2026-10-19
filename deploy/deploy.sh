@@ -40,11 +40,23 @@ composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 npm ci --no-audit --no-fund
 npm run build
 
-# storage is linked from app/shared on the server, so the release must not carry its own.
-rm -rf node_modules tests docs deploy storage .github .env.example phpunit.xml phpstan.neon pint.json
+rm -rf node_modules tests docs deploy .github .env.example phpunit.xml phpstan.neon pint.json
 # Package docs are about a tenth of the tarball, which otherwise sits right on the 5 MB limit.
 find vendor -type f -name '*.md' -delete
 find vendor -depth -type d -name docs -exec rm -r {} +
+
+# Boot the stripped release without dev dependencies, so a missing class fails here rather than
+# on the server. The server builds its own caches, so these are cleared again.
+export APP_KEY="base64:$(head -c 32 /dev/urandom | base64)" APP_ENV=production
+php artisan route:list
+php artisan config:cache
+php artisan view:cache
+php artisan config:clear
+php artisan view:clear
+unset APP_KEY APP_ENV
+
+# storage is linked from app/shared on the server, so the release must not carry its own.
+rm -rf storage
 
 mkdir -p "$ROOT/deploy/build"
 # Without these, macOS tar adds AppleDouble files and xattr headers that GNU tar warns about.
