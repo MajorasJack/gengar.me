@@ -11,9 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 class AddNoTransformCacheControl
 {
     /**
-     * Add `no-transform` to the response's Cache-Control header, keeping the
-     * directives already there, so Cloudflare does not inject its bot detection
-     * script into the page.
+     * Add `no-transform` to the response's Cache-Control header so Cloudflare
+     * does not inject its bot detection script into the page.
      *
      * @param  Closure(Request): Response  $next
      */
@@ -21,7 +20,9 @@ class AddNoTransformCacheControl
     {
         $response = $next($request);
 
-        $response->headers->set('Cache-Control', sprintf('%s, no-transform', $response->headers->get('Cache-Control')));
+        // Store the computed default (`no-cache, private`) as directives, or adding one replaces it.
+        $response->headers->set('Cache-Control', $response->headers->get('Cache-Control'));
+        $response->headers->addCacheControlDirective('no-transform');
 
         return $response;
     }
