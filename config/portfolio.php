@@ -19,6 +19,8 @@ return [
         'location' => 'Manchester, UK',
         'remote' => 'remote-first',
         // 70 words at most (CONT-1).
+        // Meta and Open Graph description, under 160 characters.
+        'description' => 'Jack Evans is a senior PHP and Laravel engineer in Manchester, UK, with fourteen years building backend systems. Running projects, CV and contact details.',
         'intro' => "I've spent fourteen years building backend systems in PHP and Laravel, most recently on a healthcare platform used across several countries, and before that in food delivery, legal tech and e-commerce. Alongside the code, I tend to end up writing the testing guides, RFCs and review norms a team works to. I work remotely and do my best work when I can own a domain.",
         'email' => 'jack@gengar.me',
         'linkedin' => 'https://www.linkedin.com/in/jack-evans-2526a1a3',

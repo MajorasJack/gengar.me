@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+    Source for public/og.png (1200x630, direction C). Rebuild after editing:
+    chrome-headless-shell --headless --hide-scrollbars --force-device-scale-factor=1 --window-size=1200,630 --allow-file-access-from-files --screenshot=public/og.png "file://$PWD/resources/og/og.html"
+    then strip metadata with `magick public/og.png -strip public/og.png`.
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<style>
+    @font-face { font-family: 'Geist'; src: url('../../public/fonts/geist-latin.woff2') format('woff2'); font-weight: 400 600; }
+    @font-face { font-family: 'Geist Mono'; src: url('../../public/fonts/geist-mono-latin.woff2') format('woff2'); font-weight: 400 500; }
+    html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+    body {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        padding: 88px 96px 80px;
+        background: #15121b;
+        color: #ebe6f5;
+        font-family: 'Geist', sans-serif;
+    }
+    .prompt { font-family: 'Geist Mono', monospace; font-size: 28px; color: #a199b3; }
+    .prompt b { color: #c4a8ff; font-weight: 500; }
+    h1 { margin: 28px 0 0; max-width: 15ch; font-size: 84px; font-weight: 600; line-height: 1.05; letter-spacing: -0.025em; }
+    .running { margin-top: auto; padding-top: 28px; border-top: 2px solid #2e2838; font-family: 'Geist Mono', monospace; font-size: 26px; color: #a199b3; }
+    .running span { color: #ebe6f5; }
+    .dot { display: inline-block; width: 14px; height: 14px; margin-right: 14px; border-radius: 50%; background: #7fd49b; vertical-align: 2px; }
+</style>
+</head>
+<body>
+    <div class="prompt"><b>jack@gengar.me</b> ~ Manchester, UK · remote-first</div>
+    <h1>Jack Evans, senior PHP / Laravel engineer</h1>
+    <div class="running"><i class="dot"></i><span>gengar.me</span> · projects, CV and contact</div>
+</body>
+</html>
