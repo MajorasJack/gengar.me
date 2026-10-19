@@ -100,7 +100,7 @@ Server changes are outward-facing. Confirm with Jack before replacing `public_ht
 - [x] **S3-02** (#35) Build the detail view (problem, what was built, engineering notes, stack, link or label, tests checked date) and a styled `404` view · Req: CONT-7, CONT-8 · Files: `resources/views/project.blade.php`, `resources/views/errors/404.blade.php` · `routine` · Done when both views match the site layout and tests assert each section heading.
 - [x] **S3-03** (#36) Draft detail copy for each of the five projects from their repos (`PRODUCT.md`, READMEs, module lists) for Jack to edit, following the public bio rules · Req: CONT-7, CONT-6 · Files: `config/portfolio.php` · `routine` · Done when Jack has approved each entry and `PublicCopyTest` still passes.
 - [x] **S3-04** (#38) Link each table row name to its detail page · Req: CONT-7 · Files: `resources/views/partials/projects.blade.php` · `routine` · Done when a test asserts each row links to `/projects/{slug}`.
-- [x] **S3-05** (#40) (Could) Add Promotr and DrinkSafe screenshots from their `brag-output/brag.jpg`, converted to WebP with `width` and `height` set and `loading="lazy"` · Req: CONT-7, NFR-1 · Files: `public/images/projects/` · `routine` · Done when images render without layout shift and the page stays inside the size budget.
+- [x] **S3-05** (#40) (Could) Add Promotr and DrinkSafe screenshots from their `brag-output/brag.jpg`, converted to WebP with `width` and `height` set and `loading="lazy"` (S4-04 later switched the screenshot to `fetchpriority="high"`, since it is the page's largest paint) · Req: CONT-7, NFR-1 · Files: `public/images/projects/` · `routine` · Done when images render without layout shift and the page stays inside the size budget.
 
 **S3 review checkpoint**
 - [x] `code-auditor` review; Critical and High findings fixed (none at Critical or High; the Medium 404 path echo and four Lows fixed in #41)
@@ -123,6 +123,6 @@ Server changes are outward-facing. Confirm with Jack before replacing `public_ht
 - [x] **S4-05** (#31) Add a favicon in the direction C style: an SVG icon (a lowercase `g` in the accent colour on the dark background) as `public/favicon.svg`, plus `public/favicon.ico` (32x32) and `public/apple-touch-icon.png` (180x180), linked from the layout · Req: NFR-4, NFR-7 · Files: `public/favicon.*`, `public/apple-touch-icon.png`, `resources/views/layouts/site.blade.php`, `tests/Feature/FaviconTest.php` · `routine` · Done when the layout links all three, each file returns 200 locally, and the `public responses` tests still pass.
 
 **S4 review checkpoint**
-- [x] `feature-dev:code-reviewer` review; Critical and High findings fixed (#5: `/up` third-party assets fixed; route list pinned; checks run on every public response)
+- [x] `feature-dev:code-reviewer` review; Critical and High findings fixed (review of #43 and #44: no Critical, High or Medium; a token-coverage and no-raw-colour test added and the S3-05 wording fixed in the S4 review PR. The earlier S4 favicon, meta and sitemap work was covered by the S3 audit)
 - [ ] Demo: paste the URL into Slack and see the preview card; Lighthouse report meets targets
 - [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
