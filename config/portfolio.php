@@ -41,7 +41,6 @@ return [
     // status (live or private), detail (overview, problem, built, notes; S3), source (public repo url,
     // optional). tests is the number of
     // test functions in the PHP suite, from `pest --list-tests` with dataset rows collapsed.
-    // TODO(owner): every `detail` below is a draft from the project's own docs, waiting on Jack to approve or edit.
     'projects' => [
         [
             'slug' => 'promotr',
@@ -101,7 +100,7 @@ return [
             'status' => 'live',
             'detail' => [
                 'overview' => 'Darkroom is a set of image tools in one invite-only web app. It removes backgrounds and objects, upscales photos, converts and compresses images, blurs faces, reads text with OCR and turns images into PDFs.',
-                'problem' => 'Online image tools upload your photos to someone else\'s server, and the popular ones charge for their full features.',
+                'problem' => 'Online image tools upload people's photos to someone else\'s server, and the popular ones charge for their full features.',
                 'built' => 'A Laravel 13 app with an Inertia and Vue 3 front end, built AI-first with Claude Code, and a Python FastAPI service that does the image processing with pyvips and ONNX models.',
                 'notes' => [
                     'Image processing is split between a server service and the browser.',
