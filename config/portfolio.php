@@ -21,7 +21,7 @@ return [
         // 70 words at most (CONT-1).
         // Meta and Open Graph description, under 160 characters.
         'description' => 'Jack Evans is a senior PHP and Laravel engineer in Manchester, UK, with fourteen years building backend systems. Running projects, CV and contact details.',
-        'intro' => "I've spent fourteen years building backend systems in PHP and Laravel, most recently on a healthcare platform used across several countries, and before that in food delivery, legal tech and e-commerce. Alongside the code, I tend to end up writing the testing guides, RFCs and review norms a team works to. I work remotely and do my best work when I can own a domain.",
+        'intro' => "I've spent fourteen years building backend systems in PHP and Laravel, most recently on a healthcare platform used across several countries, and before that in food delivery, legal tech and e-commerce. Alongside the code, I tend to end up writing the testing guides, RFCs and code review process a team works to. I work remotely and thrive when given end-to-end ownership of a specific project or focus area.",
         'email' => 'jack@gengar.me',
         'linkedin' => 'https://www.linkedin.com/in/jack-evans-2526a1a3',
         'github' => 'https://github.com/MajorasJack',
@@ -32,8 +32,8 @@ return [
     'what_i_do' => [
         ['title' => 'Performance', 'description' => 'Profiling slow pages, rewriting queries and adding the indexes that were missing.'],
         ['title' => 'APIs and integrations', 'description' => 'Designing APIs, and connecting to delivery platforms, payment providers and national eID services.'],
-        ['title' => 'Engineering standards', 'description' => 'Writing the testing guides, RFCs and review norms that a team works to.'],
-        ['title' => 'AI-assisted development', 'description' => 'Using Claude Code across the stack, with front ends built AI-first and the backend design and review kept with me.'],
+        ['title' => 'Engineering standards', 'description' => 'Writing the testing guides, RFCs and code review process that a team works to.'],
+        ['title' => 'AI-assisted development', 'description' => 'Using Claude Code across the stack, building front ends AI-first while I design the architecture and backend and review every change.'],
     ],
 
     // Keys per entry: slug, name, summary, stack (list), tests (int, approximate),
