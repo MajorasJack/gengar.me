@@ -12,8 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 class RedirectWwwToCanonicalHost
 {
     /**
-     * Send requests on `www.` the canonical host to the canonical host, so the
-     * site has a single address.
+     * Redirect requests on the `www.` form of the canonical host to the canonical
+     * host, so the site has a single address.
      *
      * @param  Closure(Request): Response  $next
      */
