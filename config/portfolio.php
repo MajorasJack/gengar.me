@@ -15,21 +15,20 @@ return [
         'role' => 'senior PHP / Laravel engineer',
         'location' => 'Manchester, UK',
         'remote' => 'remote-first',
-        // TODO(owner): S1-02 replaces this draft from mockup C with Jack's intro (70 words at most).
-        'intro' => 'Fourteen years building APIs, integrations and the databases underneath them, in healthcare SaaS, food delivery, legal tech and e-commerce. I like owning a problem end to end, from the design doc to the measured result.',
+        // 70 words at most (CONT-1).
+        'intro' => "I've spent fourteen years building backend systems in PHP and Laravel, most recently on a healthcare platform used across several countries, and before that in food delivery, legal tech and e-commerce. Alongside the code, I tend to end up writing the testing guides, RFCs and review norms a team works to. I work remotely and do my best work when I can own a domain.",
         'email' => 'jack@gengar.me',
         'linkedin' => 'https://www.linkedin.com/in/jack-evans-2526a1a3',
         'github' => 'https://github.com/MajorasJack',
         'cv' => '/cv.pdf',
     ],
 
-    // TODO(owner): S1-02 replaces these drafts from mockup C with Jack's copy: one sentence each,
-    // no employer names, no performance figures (CONT-2).
+    // One sentence each, with no employer names and no performance figures (CONT-2).
     'what_i_do' => [
-        ['title' => 'Performance', 'description' => 'Slow queries traced to the cause and fixed at the data layer.'],
-        ['title' => 'APIs and integrations', 'description' => 'Queues, webhooks, third-party platforms, eID sign-in.'],
-        ['title' => 'Standards', 'description' => 'Testing guides, review norms, CI, RFCs.'],
-        ['title' => 'Claude Code', 'description' => 'AI-led front ends. I own the backend, tests and review.'],
+        ['title' => 'Performance', 'description' => 'Profiling slow pages, rewriting queries and adding the indexes that were missing.'],
+        ['title' => 'APIs and integrations', 'description' => 'Designing APIs, and connecting to delivery platforms, payment providers and national eID services.'],
+        ['title' => 'Engineering standards', 'description' => 'Writing the testing guides, RFCs and review norms that a team works to.'],
+        ['title' => 'AI-assisted development', 'description' => 'Using Claude Code across the stack, with front ends built AI-first and the backend design and review kept with me.'],
     ],
 
     // Keys per entry: slug, name, summary, stack (list), tests (int, approximate),
@@ -102,7 +101,6 @@ return [
     ],
 
     // Names that must never appear on a public page (CONT-6). Entries are SHA-256 hashes of each normalised name, so the public repo does not list them; add one with `php artisan portfolio:denylist-hash "Name"`.
-    // TODO(owner): Jack to confirm this list: every employer in the CV profile, then the shop and label names and their domains.
     'denylist' => [
         '25b6ae267dcdfdd1318176b0db5cb494a6c5156d378cea3bd5bccec582b6dd57',
         'd4a1d34e9688072e6971e4ef5541a7aea76e866b11c9bd0a56709f1c4f78f275',
