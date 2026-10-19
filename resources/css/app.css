@@ -368,13 +368,10 @@ td.tests {
 }
 
 /* Project detail */
+/* Underlined: the accent alone is under 3:1 against the muted prompt text (Lighthouse link-in-text-block). */
 .prompt a {
     color: var(--colour-accent);
-    text-decoration: none;
-}
-
-.prompt a:hover {
-    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 .facts {
