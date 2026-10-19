@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Middleware\AddNoTransformCacheControl;
+use App\Http\Middleware\RedirectWwwToCanonicalHost;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -19,6 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Global, so 404s for unmatched URLs get it too.
         $middleware->append(AddNoTransformCacheControl::class);
+        // After the line above, so its redirects also get `no-transform`, and global, so unmatched URLs redirect too.
+        $middleware->append(RedirectWwwToCanonicalHost::class);
         $middleware->group('public', [SubstituteBindings::class]);
         $middleware->preventRequestsDuringMaintenance(except: ['up']);
     })

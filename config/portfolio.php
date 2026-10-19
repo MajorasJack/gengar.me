@@ -10,6 +10,9 @@ declare(strict_types=1);
 return [
     'available' => true,
 
+    // Requests on `www.` this host get a 301 to it (OPS-5).
+    'canonical_host' => 'gengar.me',
+
     'profile' => [
         'name' => 'Jack Evans',
         'role' => 'senior PHP / Laravel engineer',
