@@ -15,6 +15,7 @@ fi
 
 HOST=cyberpanel
 SITE_HOME=/home/gengar.me
+SITE_USER=genga7347
 MAX_BYTES=$((5 * 1024 * 1024))
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 RELEASE="$(date -u +%Y%m%d%H%M%S)-$(git -C "$ROOT" rev-parse --short HEAD)"
@@ -87,8 +88,10 @@ fi
 
 test -f "$ROOT/deploy/remote-deploy.sh"
 scp "$OUT" "$HOST:$SITE_HOME/app/releases/$RELEASE.tgz"
-# The script is piped in, so the server always runs the version from this commit.
-ssh "$HOST" bash -s -- "$RELEASE" < "$ROOT/deploy/remote-deploy.sh"
+# `ssh cyberpanel` logs in as root, so the upload is handed to the site user, which runs the
+# rest. The script is piped in, so the server always runs the version from this commit.
+ssh "$HOST" "chown $SITE_USER $SITE_HOME/app/releases/$RELEASE.tgz && sudo -u $SITE_USER -H bash -s -- $RELEASE" \
+    < "$ROOT/deploy/remote-deploy.sh"
 rm "$OUT"
 
 echo "Deployed $RELEASE"
