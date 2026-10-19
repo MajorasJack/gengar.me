@@ -38,7 +38,7 @@ The app has no database (ADR-001). These rules still apply:
 **S0 review checkpoint**
 - [x] `feature-dev:code-reviewer` review; Critical and High findings fixed (#5: `/up` third-party assets fixed; route list pinned; checks run on every public response)
 - [x] Demo: CI green; `/` renders the layout with no cookies set (checked 2026-10-18, 27 tests on `028b7e6`)
-- [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
+- [x] Sign-off: Reviewer Jack · Date 2026-10-19 · Status: Approved
 
 ---
 
@@ -61,7 +61,7 @@ The app has no database (ADR-001). These rules still apply:
 **S1 review checkpoint**
 - [x] `code-auditor` review; Critical and High findings fixed (#16: flaky denylist test fixed by a six-word limit; history exposure already accepted, context row corrected; Low findings fixed)
 - [x] Demo: open `/` at 1280px and 360px and read every section; download the CV (checked 2026-10-18 on `6660ed2` in headless Chromium: no horizontal overflow at 360px, `/cv.pdf` served as `application/pdf`, no cookies on `/`)
-- [ ] Sign-off: Reviewer ____ · Date ____ · Status: Pending / Approved / Issues found
+- [x] Sign-off: Reviewer Jack · Date 2026-10-19 · Status: Approved
 
 ---
 
