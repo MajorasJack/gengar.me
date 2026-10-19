@@ -89,3 +89,11 @@ it('runs the meta description through the denylist check', function (): void {
     expect(new DenylistMatcher(config('portfolio.denylist'))->matches($this->get('/')->getContent()))
         ->toBe([DenylistMatcher::hash($company)]);
 });
+
+it('titles the not found page', function (): void {
+    $this->get(sprintf('/%s', fake()->slug()))->assertNotFound()->assertSee('<title>Page not found, Jack Evans</title>', escape: false);
+});
+
+it('describes the not found page', function (): void {
+    $this->get(sprintf('/%s', fake()->slug()))->assertNotFound()->assertSee('<meta name="description" content="', escape: false);
+});

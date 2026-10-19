@@ -45,6 +45,16 @@ it('builds a private project with a visibility label and no url', function () us
         ->and($project->visibility)->toBe($visibility);
 });
 
+it('carries the detail copy when the entry has it', function () use ($validEntry): void {
+    $detail = ['problem' => fake()->sentence(), 'built' => fake()->sentence(), 'notes' => fake()->sentences(3)];
+
+    expect(Project::fromArray([...$validEntry(), 'detail' => $detail])->detail)->toBe($detail);
+});
+
+it('leaves the detail empty when the entry has none', function () use ($validEntry): void {
+    expect(Project::fromArray($validEntry())->detail)->toBeNull();
+});
+
 it('names the missing key when an entry lacks a required key', function (string $key) use ($validEntry): void {
     $entry = $validEntry();
     unset($entry[$key]);
