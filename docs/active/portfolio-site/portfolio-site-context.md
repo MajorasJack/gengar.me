@@ -33,7 +33,7 @@ Reference material, read when needed rather than before every task.
 |---|---|
 | `promotr.co` and `drinksafe.app` are publicly live | S1-03 (done: all live) |
 | Test counts in the inventory (regex counts, approximate) | S1-03 (run each suite's `--list-tests` or count with Pest) (done: see S1-03 below) |
-| Which GitHub repos are public, so detail pages can link source | S3-03 |
+| Which GitHub repos are public, so detail pages can link source | S3-03 (done 2026-10-19 with `gh repo view`: only `MajorasJack/drinksafe.app` is public, so only DrinkSafe has a `source` link; `backline` (Promotr), `larder`, `image-mastery` (Darkroom) and `movies` are private) |
 | DNS for `gengar.me` is on Cloudflare | S2-05 (done: responses come through Cloudflare, `server: cloudflare` and `cf-ray`) |
 | How Larder's script handles PHP workers holding old release paths | S2-02 (done: `pkill -u <site user> lsphp \|\| true` after the switch; LiteSpeed respawns them on the next request) |
 
@@ -76,3 +76,4 @@ Reference material, read when needed rather than before every task.
 
 ## Waiting on Jack
 - S2-04: Jack is adding `https://gengar.me/up` (HTTP `200`, body `ok`) to his uptime monitor.
+- S3-03: approve or edit the five drafted `detail` entries in `config/portfolio.php` (marked `TODO(owner)`), then remove the TODO. Each note comes from the project's own docs; check especially that "built AI-first with Claude Code" is right for each front end.
