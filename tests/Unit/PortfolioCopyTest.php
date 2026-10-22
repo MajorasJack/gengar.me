@@ -13,6 +13,11 @@ test('what I do has four areas, each with a title and a description', function (
         ->each->toHaveKeys(['title', 'description']);
 });
 
+test('every uses section has a title and items, each with a name and a note', function () use ($portfolio): void {
+    expect($portfolio['uses'])->not->toBeEmpty()
+        ->each(fn ($section) => $section->toHaveKeys(['title', 'items'])->items->each->toHaveKeys(['name', 'note']));
+});
+
 test('the denylist is not empty', function () use ($portfolio): void {
     expect($portfolio['denylist'])->not->toBeEmpty();
 });

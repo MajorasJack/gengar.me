@@ -1,6 +1,6 @@
 # gengar.me Portfolio - Tasks
 
-Last Updated: 2026-10-19
+Last Updated: 2026-10-22
 
 ## How to use this file
 - Before a slice: read its "Before starting" block, load the listed skills, read the listed ADRs and spec sections.
@@ -121,6 +121,7 @@ Server changes are outward-facing. Confirm with Jack before replacing `public_ht
 - [x] **S4-03** (#33) Serve `sitemap.xml` (home plus detail pages, from config) and `robots.txt` · Req: NFR-7 · Files: `routes/web.php`, `resources/views/sitemap.blade.php`, `public/robots.txt`, `tests/Feature/SitemapTest.php` · `routine` · Done when the test asserts every featured project URL appears in the sitemap.
 - [x] **S4-04** (#44, #45; live mobile, both pages: performance 100, accessibility 100, best practices 100, SEO 100) Run Lighthouse (mobile) on the live homepage and one detail page; fix anything below target · Req: NFR-2 · Files: as needed · `routine` · Done when scores are at least 95 performance and 100 accessibility, recorded in context.
 - [x] **S4-05** (#31) Add a favicon in the direction C style: an SVG icon (a lowercase `g` in the accent colour on the dark background) as `public/favicon.svg`, plus `public/favicon.ico` (32x32) and `public/apple-touch-icon.png` (180x180), linked from the layout · Req: NFR-4, NFR-7 · Files: `public/favicon.*`, `public/apple-touch-icon.png`, `resources/views/layouts/site.blade.php`, `tests/Feature/FaviconTest.php` · `routine` · Done when the layout links all three, each file returns 200 locally, and the `public responses` tests still pass.
+- [x] **S4-06** (#49) (Could) Add a `/uses` page listing tools and setup from a `portfolio.uses` config list (sections with a `title` and `items` of `name` and `note`), routed through `PortfolioController@uses` as `uses`, with its own title and description, listed in the sitemap and linked from the footer; a section with no items is not shown. · Req: NFR-4, NFR-7, UI-4, CONT-6 · Files: `config/portfolio.php`, `resources/views/uses.blade.php`, `app/Http/Controllers/PortfolioController.php`, `routes/web.php`, `resources/views/layouts/site.blade.php`, `tests/Feature/UsesPageTest.php`, `tests/Datasets/PublicResponses.php` · `routine` · Done when tests assert each configured section and item in order, that an empty section is skipped and that the footer links to `/uses`, and the `public responses` tests pass on `/uses`.
 
 **S4 review checkpoint**
 - [x] `feature-dev:code-reviewer` review; Critical and High findings fixed (review of #43 and #44: no Critical, High or Medium; a token-coverage and no-raw-colour test added and the S3-05 wording fixed in the S4 review PR. The earlier S4 favicon, meta and sitemap work was covered by the S3 audit)

@@ -160,3 +160,7 @@ it('lists the smaller tools without links', function (): void {
         ->toContain(e(config('portfolio.smaller_tools.0.name')), e(config('portfolio.smaller_tools.0.description')), e(config('portfolio.smaller_tools.1.name')), e(config('portfolio.smaller_tools.1.description')))
         ->not->toContain('<a ');
 });
+
+it('links to the uses page from the footer', function (): void {
+    $this->get('/')->assertOk()->assertSee('<a href="https://github.com/MajorasJack/gengar.me">source on GitHub</a> · <a href="/uses">uses</a>', escape: false);
+});

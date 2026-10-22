@@ -46,7 +46,18 @@ class PortfolioController extends Controller
     }
 
     /**
-     * Serve the sitemap: the homepage and each project's detail page.
+     * Show the tools and setup page, leaving out any section that has no items yet.
+     */
+    public function uses(): View
+    {
+        return view('uses', [
+            'profile' => config('portfolio.profile'),
+            'sections' => array_filter(config('portfolio.uses'), fn (array $section): bool => $section['items'] !== []),
+        ]);
+    }
+
+    /**
+     * Serve the sitemap: the homepage, the uses page and each project's detail page.
      * URLs use `portfolio.canonical_host` rather than APP_URL.
      */
     public function sitemap(): Response
@@ -55,6 +66,7 @@ class PortfolioController extends Controller
             'host' => config('portfolio.canonical_host'),
             'paths' => [
                 '/',
+                route('uses', [], false),
                 ...array_map(fn (array $project): string => sprintf('/projects/%s', $project['slug']), config('portfolio.projects')),
             ],
         ])->header('Content-Type', 'application/xml; charset=UTF-8');

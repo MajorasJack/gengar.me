@@ -1,6 +1,6 @@
 # gengar.me Portfolio - Context
 
-Last Updated: 2026-10-19
+Last Updated: 2026-10-22
 
 Reference material, read when needed rather than before every task.
 
@@ -84,6 +84,7 @@ Reference material, read when needed rather than before every task.
 | 2026-10-19 | S3-05 | The `latedoors.promotr.co` address in the Promotr screenshot comes from "The Late Doors", a made-up demo act in the brag video's mock-up. Jack confirmed it can be shown |
 | 2026-10-22 | S2-04 | Jack added `https://gengar.me/up` (HTTP `200`, body `ok`) to an uptime monitor, closing the monitoring follow-up from 2026-10-19 |
 | 2026-10-22 | Ops | `laravel/tinker` moved from `require` to `require-dev`: nothing in the app uses it, and `composer install --no-dev` now leaves it and its dependencies out of the release tarball, which sat about 300 KB under the 5 MB limit |
+| 2026-10-22 | S4-06 | `/uses` is `PortfolioController@uses`, named `uses`, in the same cookie-free group as the other pages. `portfolio.uses` is an ordered list of sections, each a `title` (lowercase, like the site's other `#` headings) and `items` of `name` and `note`; the controller drops any section whose `items` is empty, so a section only appears once it has content. Each section is a `.facts` list under its h2, and the one CSS addition (`h2 + .facts`) removes the list's top margin there, with no new colours. The page sets its own title and description, so the S4-02 tags, canonical URL and JSON-LD render; the sitemap lists `/uses` from `route('uses')`, and the shared footer links to it after `source on GitHub`. The development and this site sections use only facts from this repo, its docs and the deploy setup; Jack gave the hardware (a MacBook Pro, Apple silicon) and editor (PhpStorm) entries on 2026-10-22. Checked: the empty-section test failed with the filter removed, and the denylist, phone and figure tests each failed on the `uses page` row with a hashed made-up name, a phone number and a timing figure put in a note. Screenshots at 1280px and 360px read by eye, with no horizontal overflow |
 
 ## Waiting on Jack
 None.
