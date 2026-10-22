@@ -190,7 +190,7 @@ return [
                 ['name' => 'Pint', 'note' => 'Code style, checked in CI.'],
                 ['name' => 'Larastan', 'note' => 'Static analysis at level 8, checked in CI.'],
                 ['name' => 'Vite', 'note' => 'Builds the CSS and front-end assets.'],
-                ['name' => 'Claude Code', 'note' => 'AI-assisted development across the stack. Front ends are built AI-first, and I own the architecture, data model, tests and review.'],
+                ['name' => 'Claude Code', 'note' => 'Used across the stack, building front ends AI-first while I design the architecture and backend and review every change.'],
                 ['name' => 'GitHub', 'note' => 'Code, pull requests and GitHub Actions for CI.'],
                 ['name' => 'Docker', 'note' => 'Runs the deploy script tests in a clean Linux container.'],
                 ['name' => 'Playwright', 'note' => 'Its headless Chromium takes screenshots and runs Lighthouse.'],
