@@ -49,7 +49,7 @@
             @yield('content')
         </main>
         <footer class="site-footer">
-            built with Laravel + Blade · <a href="https://github.com/MajorasJack/gengar.me">source on GitHub</a>
+            built with Laravel + Blade · <a href="https://github.com/MajorasJack/gengar.me">source on GitHub</a> · <a href="{{ route('uses', [], false) }}">uses</a>
         </footer>
     </div>
 </body>

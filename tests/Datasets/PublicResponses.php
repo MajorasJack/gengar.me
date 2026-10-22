@@ -8,5 +8,6 @@ dataset('public responses', [
     'sitemap' => '/sitemap.xml',
     'project page' => '/projects/promotr',
     'private project page' => '/projects/larder',
+    'uses page' => '/uses',
     'not found page' => fn (): string => sprintf('/%s', fake()->slug()),
 ]);

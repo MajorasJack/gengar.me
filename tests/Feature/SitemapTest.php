@@ -34,6 +34,11 @@ it('lists each project detail page', function (): void {
     ));
 });
 
+it('lists the uses page', function (): void {
+    $this->get('/sitemap.xml')
+        ->assertSee(sprintf('<loc>https://%s/uses</loc>', config('portfolio.canonical_host')), escape: false);
+});
+
 it('points robots.txt at the sitemap', function (): void {
     expect(File::get(public_path('robots.txt')))
         ->toContain(sprintf('Sitemap: https://%s/sitemap.xml', config('portfolio.canonical_host')));

@@ -382,6 +382,11 @@ td.tests {
     font-size: var(--text-xs);
 }
 
+/* Under a section heading (the uses page), the heading's own margin is the gap. */
+h2 + .facts {
+    margin-top: 0;
+}
+
 .facts div {
     display: grid;
     grid-template-columns: 7rem minmax(0, 1fr);

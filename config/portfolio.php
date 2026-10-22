@@ -180,6 +180,39 @@ return [
         ['name' => 'Shopify image optimiser', 'description' => 'Compresses product images and drafts alt text with Claude for a person to approve.'],
     ],
 
+    // The `/uses` page, in this order. Each section has a title and a list of items (name, short note); a section with no items is not shown.
+    'uses' => [
+        [
+            'title' => 'development',
+            'items' => [
+                ['name' => 'Laravel Herd', 'note' => 'Runs PHP 8.4 and serves my local sites.'],
+                ['name' => 'Laravel and Pest', 'note' => 'The framework and test runner behind my projects.'],
+                ['name' => 'Pint', 'note' => 'Code style, checked in CI.'],
+                ['name' => 'Larastan', 'note' => 'Static analysis at level 8, checked in CI.'],
+                ['name' => 'Vite', 'note' => 'Builds the CSS and front-end assets.'],
+                ['name' => 'Claude Code', 'note' => 'AI-assisted development across the stack. Front ends are built AI-first, and I own the architecture, data model, tests and review.'],
+                ['name' => 'GitHub', 'note' => 'Code, pull requests and GitHub Actions for CI.'],
+                ['name' => 'Docker', 'note' => 'Runs the deploy script tests in a clean Linux container.'],
+                ['name' => 'Playwright', 'note' => 'Its headless Chromium takes screenshots and runs Lighthouse.'],
+            ],
+        ],
+        [
+            'title' => 'this site',
+            'items' => [
+                ['name' => 'Laravel 13', 'note' => 'Blade views and hand-written CSS, with content in one config file.'],
+                ['name' => 'No database', 'note' => 'Nothing to migrate or back up.'],
+                ['name' => 'No JavaScript', 'note' => 'Every page works with scripts turned off.'],
+                ['name' => 'Geist', 'note' => 'Geist and Geist Mono, self-hosted, so no requests go to a font service.'],
+                ['name' => 'OpenLiteSpeed', 'note' => 'Serves the site, behind Cloudflare.'],
+                ['name' => 'Releases', 'note' => 'Each deploy uploads a tarball as a new release, so a rollback is one symlink change.'],
+            ],
+        ],
+        // TODO(owner): the computer, monitor, keyboard and anything else worth listing.
+        ['title' => 'hardware', 'items' => []],
+        // TODO(owner): the editor, terminal, shell and any tools around them.
+        ['title' => 'editor and terminal', 'items' => []],
+    ],
+
     // Names that must never appear on a public page (CONT-6). Entries are SHA-256 hashes of each normalised name, so the public repo does not list them; add one with `php artisan portfolio:denylist-hash "Name"`.
     'denylist' => [
         '25b6ae267dcdfdd1318176b0db5cb494a6c5156d378cea3bd5bccec582b6dd57',

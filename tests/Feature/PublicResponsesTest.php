@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 
 test('only the public pages are registered', function (): void {
-    expect(collect(Route::getRoutes()->getRoutes())->map->uri()->sort()->values()->all())->toBe(['/', 'projects/{slug}', 'sitemap.xml', 'up']);
+    expect(collect(Route::getRoutes()->getRoutes())->map->uri()->sort()->values()->all())->toBe(['/', 'projects/{slug}', 'sitemap.xml', 'up', 'uses']);
 });
 
 it('sets no cookies', function (string $uri): void {
