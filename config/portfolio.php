@@ -207,10 +207,18 @@ return [
                 ['name' => 'Releases', 'note' => 'Each deploy uploads a tarball as a new release, so a rollback is one symlink change.'],
             ],
         ],
-        // TODO(owner): the computer, monitor, keyboard and anything else worth listing.
-        ['title' => 'hardware', 'items' => []],
-        // TODO(owner): the editor, terminal, shell and any tools around them.
-        ['title' => 'editor and terminal', 'items' => []],
+        [
+            'title' => 'hardware',
+            'items' => [
+                ['name' => 'MacBook Pro', 'note' => 'Apple silicon.'],
+            ],
+        ],
+        [
+            'title' => 'editor',
+            'items' => [
+                ['name' => 'PhpStorm', 'note' => 'For PHP and Laravel.'],
+            ],
+        ],
     ],
 
     // Names that must never appear on a public page (CONT-6). Entries are SHA-256 hashes of each normalised name, so the public repo does not list them; add one with `php artisan portfolio:denylist-hash "Name"`.
