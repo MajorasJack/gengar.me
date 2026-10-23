@@ -119,6 +119,18 @@ it('links each project name to its detail page', function (): void {
     ], escape: false);
 });
 
+it('lists Invoice Inbox second in the projects table, after Promotr and before Larder', function (): void {
+    $this->get('/')->assertOk()->assertSeeInOrder([
+        '<a href="/projects/promotr">Promotr</a>',
+        '<a href="/projects/invoice-inbox">Invoice Inbox</a>',
+        '<a href="/projects/larder">Larder</a>',
+    ], escape: false);
+});
+
+it('links the Invoice Inbox host cell to its live site', function (): void {
+    $this->get('/')->assertOk()->assertSee('<a href="https://accounting.gengar.me">accounting.gengar.me</a>', escape: false);
+});
+
 it('marks a private project with the off status dot', function (): void {
     config(['portfolio.projects' => [
         ['slug' => fake()->slug(), 'name' => fake()->word(), 'summary' => fake()->sentence(), 'stack' => ['Laravel 13'], 'tests' => fake()->numberBetween(1, 5000), 'tests_checked_at' => '2026-10-18', 'url' => null, 'visibility' => 'private beta', 'status' => 'private'],
@@ -159,6 +171,10 @@ it('lists the smaller tools without links', function (): void {
     expect($tools)
         ->toContain(e(config('portfolio.smaller_tools.0.name')), e(config('portfolio.smaller_tools.0.description')), e(config('portfolio.smaller_tools.1.name')), e(config('portfolio.smaller_tools.1.description')))
         ->not->toContain('<a ');
+});
+
+it('leaves Invoice Inbox out of the smaller tools now that it is a featured project', function (): void {
+    expect(Str::between($this->get('/')->assertOk()->getContent(), 'id="smaller-tools"', '</section>'))->not->toContain('Invoice Inbox');
 });
 
 it('links to the uses page from the footer', function (): void {
