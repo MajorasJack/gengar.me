@@ -6,8 +6,8 @@ use App\Portfolio\Project;
 
 $portfolio = require sprintf('%s/config/portfolio.php', dirname(__DIR__, 3));
 
-test('there are five featured projects', function () use ($portfolio): void {
-    expect($portfolio['projects'])->toHaveCount(5);
+test('there are six featured projects', function () use ($portfolio): void {
+    expect($portfolio['projects'])->toHaveCount(6);
 });
 
 it('builds every featured project through Project::fromArray', function (array $entry): void {

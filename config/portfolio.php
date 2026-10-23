@@ -72,6 +72,30 @@ return [
             ],
         ],
         [
+            'slug' => 'invoice-inbox',
+            'name' => 'Invoice Inbox',
+            'summary' => 'Reads supplier bills from uploads and Gmail with Claude, and posts them to Xero once a person has checked them.',
+            'stack' => ['Laravel 13', 'Inertia 3', 'Vue 3', 'Claude', 'Gmail API', 'Xero API'],
+            'tests' => 3675,
+            'tests_checked_at' => '2026-10-23',
+            'url' => 'https://accounting.gengar.me',
+            'visibility' => null,
+            'status' => 'live',
+            // TODO(owner): approve the summary and detail copy before it goes live.
+            'detail' => [
+                'overview' => 'Invoice Inbox is a bookkeeping app for a small business and its accountant. Supplier bills arrive by upload, from a computer or a phone, or from a Gmail label. Claude reads each bill, a person checks it in a review queue, and the approved bill is posted to Xero with the original attached.',
+                'problem' => 'Supplier bills arrive by email and on paper, and typing each one into the accounts by hand takes time and invites mistakes.',
+                'built' => 'A modular Laravel 13 app with an Inertia and Vue 3 front end, built AI-first with Claude Code. Claude reads the bills, and approved bills are posted through the Xero API.',
+                'notes' => [
+                    'Nothing reaches Xero until a person has confirmed or corrected what Claude read.',
+                    'Corrections made in review are remembered for each supplier, so their next bill needs less editing.',
+                    'Exact copies of a bill are recognised on arrival, and likely duplicates are flagged in review.',
+                    'Owners and accountants have separate roles, so an accountant can review bills without managing the team or the connections.',
+                    'A modular codebase where each module has its own tests, and architecture tests keep the dependencies between modules in one direction.',
+                ],
+            ],
+        ],
+        [
             'slug' => 'larder',
             'name' => 'Larder',
             'summary' => 'Household recipes and pantry app that imports recipes with Claude, matches them to stock and builds the shopping list.',
@@ -175,7 +199,6 @@ return [
 
     // Personal tools tied to Jack's own shops: no links, and no shop, store or supplier names (CONT-5).
     'smaller_tools' => [
-        ['name' => 'Invoice Inbox', 'description' => 'Reads supplier invoices from Gmail with Claude and posts them to Xero.'],
         ['name' => 'Pre-orders Shopify app', 'description' => 'Pre-order and back-in-stock app with a storefront extension.'],
         ['name' => 'Shopify image optimiser', 'description' => 'Compresses product images and drafts alt text with Claude for a person to approve.'],
     ],
