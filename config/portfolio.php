@@ -81,7 +81,6 @@ return [
             'url' => 'https://accounting.gengar.me',
             'visibility' => null,
             'status' => 'live',
-            // TODO(owner): approve the summary and detail copy before it goes live.
             'detail' => [
                 'overview' => 'Invoice Inbox is a bookkeeping app for a small business and its accountant. Supplier bills arrive by upload, from a computer or a phone, or from a Gmail label. Claude reads each bill, a person checks it in a review queue, and the approved bill is posted to Xero with the original attached.',
                 'problem' => 'Supplier bills arrive by email and on paper, and typing each one into the accounts by hand takes time and invites mistakes.',
